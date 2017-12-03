@@ -1,0 +1,109 @@
+.App {
+  padding: 30px 100px;
+}
+
+.logo{
+  margin-right: 55vw;
+  text-decoration: none;
+  color: rgb(148, 185, 105);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.nav{
+  margin-right: 20px;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+
+.active{
+  background-color: rgb(148, 185, 105);
+  color: white;
+  text-decoration: none;
+}
+
+a{
+  color: #000;
+}
+
+.container{
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.container input{
+  padding: 5px;
+}
+
+input[type="submit"]{
+  padding: 5px 10px;
+  background-color: rgb(148, 185, 105);
+  color: white;
+  margin-left: 17vw;
+} 
+
+.container form > div{
+  margin-bottom: 10px;
+}
+
+.container form label{
+  display: inline-block;
+  width: 10vw;
+}
+
+.hotel-card{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.hotel-card img{
+  max-width: 60%;
+}
+
+.hotel-card p{
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.hotel-card a{
+  padding: 5px 10px;
+  background-color: rgb(148, 185, 105);
+  color: white;
+  text-decoration: none;
+}
+
+.hotel-card-details{
+  text-align: center;
+}
+
+.hotel-card-details div{
+  text-align: left;
+}
+
+.hotel-card-details div span{
+  font-weight: bold;
+}
+
+.hotel-card-details img{
+  max-width: 60%;
+}
+
+.pagination {
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.pagination>a {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  margin: 0.1em 0.2em;
+  background: #d4d3d3;
+  color: rgb(102, 102, 102);
+  text-decoration: none;
+}
+
+.pagination>a:hover {
+  background: #ececec
+}

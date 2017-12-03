@@ -1,0 +1,97 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "error",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "no-extra-semi": "error",
+        "require-jsdoc": "off",
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"],
+        "no-use-before-define": "off",
+        "no-console": "error", // disallow use of console (off by default in the node environment)
+        "no-constant-condition": "error", // disallow use of constant expressions in conditions
+        "no-control-regex": "error", // disallow control characters in regular expressions
+        "no-debugger": "error", // disallow use of debugger
+        "no-dupe-keys": "error", // disallow duplicate keys when creating object literals
+        "no-empty": "error", // disallow empty statements
+        "no-ex-assign": "error", // disallow assigning to the exception in a catch block
+        "no-extra-boolean-cast": "error", // disallow double-negation boolean casts in a boolean context
+        "no-extra-parens": "off", // disallow unnecessary parentheses (off by default)
+        "no-func-assign": "error", // disallow overwriting functions written as function declarations
+        "no-inner-declarations": "error", // disallow function or variable declarations in nested blocks
+        "no-invalid-regexp": "error", // disallow invalid regular expression strings in the RegExp constructor
+        "no-irregular-whitespace": "error", // disallow irregular whitespace outside of strings and comments
+        "no-negated-in-lhs": "error", // disallow negation of the left operand of an in expression
+        "no-obj-calls": "error", // disallow the use of object properties of the global object (Math and JSON) as functions
+        "no-regex-spaces": "error", // disallow multiple spaces in a regular expression literal
+        "quote-props": "off", // disallow reserved words being used as object literal keys (off by default)
+        "no-sparse-arrays": "error", // disallow sparse arrays
+        "use-isnan": "error", // disallow comparisons with the value NaN
+        "valid-jsdoc": "off", // Ensure JSDoc comments are valid (off by default)
+        "block-scoped-var": "error", // treat var statements as if they were block scoped (off by default)
+        "prefer-const": "error",
+        "complexity": "error", // specify the maximum cyclomatic complexity allowed in a program (off by default)
+        "consistent-return": "error", // require return statements to either always or never specify values
+        "curly": "error", // specify curly brace conventions for all control statements
+        "default-case": "error", // require default case in switch statements (off by default)
+        "dot-notation": "error", // encourages use of dot notation whenever possible
+        "eqeqeq": "error", // require the use of === and !==
+        "guard-for-in": "error", // make sure for-in loops have an if statement (off by default)
+        "no-alert": "error", // disallow the use of alert, confirm, and prompt
+        "no-div-regex": "error", // disallow division operators explicitly at beginning of regular expression (off by default)
+        "no-else-return": "error", // disallow else after a return in an if (off by default)
+        "no-labels": "error", // disallow use of labels for anything other then loops and switches
+        "no-eq-null": "error", // disallow comparisons to null without a type-checking operator (off by default)
+        "no-eval": "error", // disallow use of eval()
+        "no-extend-native": "error", // disallow adding to native types
+        "no-extra-bind": "error", // disallow unnecessary function binding
+        "no-fallthrough": "error", // disallow fallthrough of case statements
+        "no-floating-decimal": "error", // disallow the use of leading or trailing decimal points in numeric literals (off by default)
+        "no-implied-eval": "error", // disallow use of eval()-like methods
+        "no-iterator": "error", // disallow usage of __iterator__ property
+        "no-lone-blocks": "error", // disallow unnecessary nested blocks
+        "no-loop-func": "error", // disallow creation of functions within loops
+        "no-multi-spaces": "error", // disallow use of multiple spaces
+        "no-multi-str": "error", // disallow use of multiline strings
+        "no-native-reassign": "error", // disallow reassignments of native objects
+        "no-new": "error", // disallow use of new operator when not part of the assignment or comparison
+        "no-new-func": "error", // disallow use of new operator for Function object
+        "no-new-wrappers": "error", // disallows creating new instances of String, Number, and Boolean
+        "no-octal": "error", // disallow use of octal literals
+        "no-process-env": "error", // disallow use of process.env (off by default)
+        "no-proto": "error", // disallow usage of __proto__ property
+        "no-redeclare": "error", // disallow declaring the same variable more then once
+        "no-return-assign": "error", // disallow use of assignment in return statement
+        "no-script-url": "error", // disallow use of javascript: urls.
+        "no-self-compare": "error", // disallow comparisons where both sides are exactly the same (off by default)
+        "no-sequences": "error", // disallow use of comma operator
+        "no-unused-expressions": "error", // disallow usage of expressions in statement position
+        "no-void": "error", // disallow use of void operator (off by default)
+        "vars-on-top": "off", // requires to declare all vars on top of their containing scope (off by default)
+        "no-delete-var": "error", // disallow deletion of variables
+        "no-label-var": "error", // disallow labels that share a name with a variable
+        "no-shadow": "error", // disallow declaration of variables already declared in the outer scope
+        "no-undef-init": "error", // disallow use of undefined when initializing variables
+        "no-undefined": "error"
+    }
+}

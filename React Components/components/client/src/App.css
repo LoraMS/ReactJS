@@ -1,0 +1,58 @@
+/* slider */
+
+.App{
+  text-align: center;
+}
+
+.wrapper{
+  display: inline-block;
+  position: relative;
+}
+
+.wrapper .sliderImg{
+  max-width: 50%;
+  max-height: auto;
+  margin: 50px auto;
+}
+
+.wrapper .slider-button{
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width: 150px;
+  height: 150px;
+}
+
+.wrapper .case-left {
+  left: 15%;
+}
+.wrapper .case-right {
+  right: 15%;
+}
+
+/* roster */
+
+.roster-image{
+  max-width: 10%;
+  height: 200px;
+  border: 2px solid orange;
+}
+
+/* character */
+
+.char-container{
+  border: 2px solid lightgray;
+  width: 30%;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.char-image{
+  max-width: 80%;
+  height: 200px;
+  border: 2px solid orange;
+}
+
+.char-bio{
+  text-align: justify;
+}
