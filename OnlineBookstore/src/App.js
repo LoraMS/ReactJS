@@ -12,6 +12,7 @@ import Register from './components/auth/Register';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import About from './components/about/About';
+import Profile from './components/user/Profile';
 
 class App extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class App extends Component {
           <Route path='/create' component={Create} />
           <Route path='/show/:id' component={Show} />
           <Route path='/about' component={About} />
+          <Route path='/profile' component={Profile} />
         </Switch>
         <Footer />
         </div>

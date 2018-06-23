@@ -8,11 +8,9 @@ var router = express.Router();
 var User = require("../models/user");
 
 router.post('/register', function(req, res) {
-  console.log(req);
     if (!req.body.username || !req.body.password) {
-      res.json({success: false, msg: 'Please pass username and password.'});
-    } else if (req.body.password !== req.body.confirm) {
-      res.json({success: false, msg: 'Password not match.'});
+      // res.json({success: false, msg: 'Please pass username and password.'});
+      res.status(401).send({success: false, msg: 'Please pass username and password.'});
     } else {
       var newUser = new User({
         username: req.body.username,
@@ -22,7 +20,8 @@ router.post('/register', function(req, res) {
       // save the user
       newUser.save(function(err) {
         if (err) {
-          return res.json({success: false, msg: 'Username already exists.'});
+          // return res.json({success: false, msg: 'Username already exists.'});
+          res.status(401).send({success: false, msg: 'Username already exists.'});
         }
         res.json({success: true, msg: 'Successful created new user.'});
       });
@@ -45,7 +44,7 @@ router.post('/login', function(req, res) {
             const token = jwt.sign(user.toJSON(), settings.secret);
             const name = req.body.username;
             // return the information including token as JSON
-            res.json({success: true, token: 'JWT ' + token, name: name });
+            res.json({success: true, token: 'JWT ' + token, name: name, msg: 'Successful logged in user.' });
           } else {
             res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
           }

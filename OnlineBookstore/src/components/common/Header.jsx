@@ -9,11 +9,13 @@ export default class Header extends Component {
             <nav class="nav container">
                 <Link className="logo nav-link" to="/"><span>The Bookstore</span></Link>
                 <NavLink exact to="/" activeClassName="active" className="nav nav-link">Home</NavLink>
-                <NavLink to="/all" activeClassName="active" className="nav nav-link">Book List</NavLink>
+                <NavLink to="/all" activeClassName="active" className="nav nav-link">Books</NavLink>
+                <NavLink to="/all" activeClassName="active" className="nav nav-link">Events</NavLink>
                 <NavLink to="/about" activeClassName="active" className="nav nav-link">Contact Us</NavLink>
                 {!loggedIn && <NavLink to="/register" activeClassName="active" className="nav nav-link">Register</NavLink>}
                 {!loggedIn && <NavLink to="/login" activeClassName="active" className="nav nav-link">Login</NavLink>}
                 {loggedIn && <NavLink to="/create" activeClassName="active" className="nav  nav-link">Create</NavLink>}
+                {loggedIn && <NavLink to="/profile" activeClassName="active" className="nav  nav-link">Profile</NavLink>}
                 {loggedIn && <a href="javascript:void(0)" onClick={onLogout} className="nav nav-link">Logout</a>}
             </nav>
         );

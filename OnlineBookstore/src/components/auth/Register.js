@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Login.css';
+import Input from './../common/Input.jsx';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
 
-  constructor() {
-    super();
     this.state = {
       username: '',
       email: '',
       password: '',
       confirm: '',
+      message: '',
     };
   }
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    console.log(state);
     this.setState(state);
   }
 
@@ -25,26 +26,65 @@ class Register extends Component {
 
     const { username, email, password } = this.state;
 
+    if (password !== this.state.confirm) {
+      this.setState({ message: 'Register failed.Passwords do not match'});
+      return;
+    }
+
     axios.post('/api/auth/register', { username, email, password })
       .then((result) => {
+        this.setState({ message: '' });
         this.props.history.push("/login")
+      })
+      .catch((error) => {
+        if(error.response.status === 401) {
+          this.setState({ message: 'Register failed. Check the form for errors' });
+        }
       });
   }
 
   render() {
-    const { username, email, password, confirm } = this.state;
+    const { username, email, password, confirm, message } = this.state;
     return (
       <div class="container">
         <form class="form-signin" onSubmit={this.onSubmit}>
-          <h2 class="form-signin-heading">Register</h2>
-          <label for="inputUser" class="sr-only">Username</label>
-          <input type="text" class="form-control" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" class="form-control" placeholder="Email address" name="email" value={email} onChange={this.onChange} required/>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" class="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
-          <label for="inputConfirm" class="sr-only">Confirm Password</label>
-          <input type="password" class="form-control" placeholder="Confirm Password" name="confirm" value={confirm} onChange={this.onChange} required/>
+        {message !== '' &&
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Error</strong> {message}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          }
+          <h2 class="form-signin-heading">Please Register</h2>
+          <Input
+            name="username"
+            type="text"
+            value={username}
+            placeholder="Username"
+            onChange={this.onChange}
+            label="Username" />
+          <Input
+            name="email"
+            type="email"
+            value={email}
+            placeholder="Email address"
+            onChange={this.onChange}
+            label="Email address" />
+          <Input
+            name="password"
+            type="password"
+            value={password}
+            placeholder="Password"
+            onChange={this.onChange}
+            label="Password" />
+          <Input
+            name="confirm"
+            type="password"
+            value={confirm}
+            placeholder="Confirm Password"
+            onChange={this.onChange}
+            label="Confirm Password" />
           <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         </form>
       </div>

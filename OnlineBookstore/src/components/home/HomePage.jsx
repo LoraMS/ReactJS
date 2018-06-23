@@ -1,139 +1,74 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Home.css';
 
 export default class Home extends Component {
     render(){
+      // const event = "https://drive.google.com/thumbnail?id=1glbfvQD9okHl9-mFmGk2kQ3O1QDRcHc1";
         return(
             <div className="container">
-                <h1>Home Page</h1>
-                <h3>Welcome to our Online Bookstore</h3>
-                <br/>
-                <br/>
-                <img src={require('./cover.png')} alt="cover_img"/>
-                {/* <HotelList page={this.props.match.params.page}/> */}
-            </div>
+                <div className="slider">
+                  <img src={require('./slider-books.jpg')} alt="cover_img"/>
+                  <div class="centered title">Inspire Daily Reading</div>
+                  <p class="centered subtitle">Visit Our Page and Discover Your Next Book</p>
+                  {/* <HotelList page={this.props.match.params.page}/> */}
+                </div>
+            <main role="main">
+              <div class="container marketing">
+                <div class="row">
+                  <div class="col-lg-4 text-center">
+                    <img class="rounded-circle" src={require('./store.jpg')} width="140" height="140" alt="prod1"/>
+                    <h2>Books</h2>
+                    <p className="text-justify">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+                    <p><Link to="/all" class="btn btn-secondary">View books »</Link></p>
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <img class="rounded-circle" src={require('./event.jpg')} width="140" height="140" alt="prod2"/>
+                    <h2>Events</h2>
+                    <p className="text-justify">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                    <p><button class="btn btn-secondary">View events »</button></p>
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <img class="rounded-circle" src={require('./g-map.jpg')} width="140" height="140" alt="prod3"/>
+                    <h2>Contact Us</h2>
+                    <p className="text-justify">Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                    <p><Link to="/about" class="btn btn-secondary">View details »</Link></p>
+                  </div>
+                </div>
+                <hr class="featurette-divider" />
+                <div class="row featurette">
+                  <div class="col-md-7">
+                    <h2 class="featurette-heading">Lorem ipsum dolor sit amet. <span class="text-muted">Consectetur adipiscing elit.</span></h2>
+                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                  </div>
+                  <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src={require('./store.jpg')} data-holder-rendered="true" />
+                  </div>
+                </div>
+                <hr class="featurette-divider" />
+                <div class="row featurette">
+                  <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading">Osed do eiusmod tempor.<span class="text-muted">Sincididunt ut labore.</span></h2>
+                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                  </div>
+                  <div class="col-md-5 order-md-1">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src={require('./event.jpg')} data-holder-rendered="true" />
+                  </div>
+                </div>
+                <hr class="featurette-divider" />
+                <div class="row featurette">
+                  <div class="col-md-7">
+                    <h2 class="featurette-heading">Consectetur adipiscing.<span class="text-muted">Cet dolore magna aliqua.</span></h2>   
+                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                  </div>
+                  <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src={require('./g-map.jpg')} data-holder-rendered="true" />
+                  </div>
+                </div>
+                <hr class="featurette-divider" />
+              </div>
+            </main>
+          </div>
         );
     }
-}
-
-{/* <main role="main">
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-    <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item">
-      <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide"/>
-      <div class="container">
-        <div class="carousel-caption text-left">
-          <h1>Example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide"/>
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item active">
-      <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide"/>
-      <div class="container">
-        <div class="carousel-caption text-right">
-          <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-
-
-
- <div class="container marketing">
-
-
-   <div class="row">
-     <div class="col-lg-4">
-       <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
-       <h2>Heading</h2>
-       <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-       <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-     </div>
-     <div class="col-lg-4">
-       <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
-       <h2>Heading</h2>
-       <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-       <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-     </div>
-     <div class="col-lg-4">
-       <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
-       <h2>Heading</h2>
-       <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-       <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-     </div>
-   </div>
-
-
-
-
-   <hr class="featurette-divider"/>
-
-   <div class="row featurette">
-     <div class="col-md-7">
-      <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-       <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-     </div>
-     <div class="col-md-5">
-       <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164235ddc9a%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164235ddc9a%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true"/>
-     </div>
-   </div>
-
-   <hr class="featurette-divider"/>
-
-   <div class="row featurette">
-     <div class="col-md-7 order-md-2">
-       <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-       <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-     </div>
-     <div class="col-md-5 order-md-1">
-       <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164235ddca1%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164235ddca1%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" />
-     </div>
-   </div>
-
-   <hr class="featurette-divider"/>
-
-   <div class="row featurette">
-     <div class="col-md-7">
-       <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-       <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-     </div>
-     <div class="col-md-5">
-       <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164235ddca3%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164235ddca3%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.125%22%20y%3D%22261.1%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" />
-    </div>
-   </div>
-
-   <hr class="featurette-divider"/>
-
-
- </div> 
-
-</main> */}
+} 

@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+//validations
+
 var BookSchema = new mongoose.Schema({
     isbn: String,
     title: String,

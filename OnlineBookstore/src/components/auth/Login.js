@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import Input from './../common/Input.jsx';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
 
-  constructor() {
-    super();
     this.state = {
       username: '',
       password: '',
-      message: ''
+      message: '',
     };
   }
   onChange = (e) => {
@@ -44,18 +45,31 @@ class Login extends Component {
       <div class="container">
         <form class="form-signin" onSubmit={this.onSubmit}>
           {message !== '' &&
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              { message }
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Error</strong> {message}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
           }
-          <h2 class="form-signin-heading">Please sign in</h2>
-          <label for="inputEmail" class="sr-only">Username</label>
-          <input type="text" class="form-control" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" class="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
+          <h2 class="form-signin-heading">Please Sign In</h2>
+          <Input
+            name="username"
+            type="text"
+            value={username}
+            placeholder="Username"
+            onChange={this.onChange}
+            label="Username" />
+          <Input
+            name="password"
+            type="password"
+            value={password}
+            placeholder="Password"
+            onChange={this.onChange}
+            label="Password" />
           <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
           <p>
-            Not a member? <Link to="/register"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
+            Not a member? <Link to="/register">Register here</Link>
           </p>
         </form>
       </div>

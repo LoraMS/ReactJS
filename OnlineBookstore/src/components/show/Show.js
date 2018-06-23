@@ -41,29 +41,22 @@ class Show extends Component {
   render() {
     return (
       <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {this.state.book.title}
-            </h3>
-          </div>
-          {/* <div class="panel-body text-right">
-            <h4><Link to="/all">Book List</Link></h4>
-          </div> */}
+        <div class="panel">
           <div class="container">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <img class="mb-3" src={this.state.book.imageURL} alt="book" />
                   <div class="mt-3">
-                  <Link to={`/edit/${this.state.book._id}`} class="btn btn-success">Edit</Link>&nbsp;
-                <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-danger">Delete</button>
+                  <Link to={`/edit/${this.state.book._id}`} class="btn btn-secondary">Edit</Link>&nbsp;
+                <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-secondary mr-1">Delete</button>
+                <button type="button" class="btn btn-secondary">Add to Card</button>
                   </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <h5>{this.state.book.title}</h5>
                     <p>{this.state.book.author}</p>
                     <p>{this.state.book.shortDescription}</p>
-                    <p class="text-danger pb-3 mb-3 mt-3 border-bottom">{this.state.book.price}$</p>
+                    <p class="text-success pb-3 mb-3 mt-3 border-bottom">{this.state.book.price}$</p>
                     <p>Category: {this.state.book.category}</p>
                     <p>Tags: React, Web Development</p>
                     <p>Publisher: {this.state.book.publisher}</p>
