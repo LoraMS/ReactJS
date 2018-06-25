@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 // const port = process.env.PORT || 5000;
 
-var book = require('./routes/book');
-var app = express();
+const book = require('./routes/book');
+const event = require('./routes/event');
+const app = express();
 
-var auth = require('./routes/auth');
+const auth = require('./routes/auth');
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://Admin:admin1@ds261040.mlab.com:61040/bookstore', {promiseLibrary: require('bluebird') })
   .then(() => console.log('connection succesful'))
@@ -28,6 +29,7 @@ app.use(fileUpload());
 app.use('/public', express.static(__dirname + '/public'));
 
 app.use('/api/book', book);
+app.use('/api/event', event);
 
 app.use('/api/auth', auth);
 
@@ -45,7 +47,7 @@ app.post('/upload', (req, res, next) => {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

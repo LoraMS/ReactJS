@@ -15,10 +15,6 @@ body {
   margin-bottom: 10px;
 }
 
-.form-signin .checkbox {
-  font-weight: normal;
-}
-
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -32,18 +28,6 @@ body {
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 .form-signin p {
   margin-top: 10px;
 }
@@ -53,7 +37,7 @@ button.btn {
 }
 
 button.btn:hover {
-  background-color: rgb(88, 155, 88);
+  background-color: olivedrab;
 }
 
 form h2{

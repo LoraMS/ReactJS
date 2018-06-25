@@ -1,5 +1,4 @@
 .card {
-  /* width: 20rem; */
   height: 480px;
 }
 
@@ -14,7 +13,7 @@ a.btn{
 }
 
 a.btn:hover{
-  background-color: rgb(88, 155, 88);
+  background-color: olivedrab;
 }
 
 .page-title{
@@ -23,4 +22,9 @@ a.btn:hover{
 
 .card-text{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.price{
+  color: green;
+  font-weight: bold;
 }

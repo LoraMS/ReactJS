@@ -15,7 +15,6 @@ export default class Catalog extends Component {
         axios.get('/api/book')
           .then(res => {
             this.setState({ books: res.data });
-            console.log(this.state.books);
           })
           .catch((error) => {
             if(error.response.status === 401) {
@@ -41,16 +40,24 @@ export default class Catalog extends Component {
                   {this.state.books.map(book =>
                     <div class="col-md-3">
                       <div class="card mb-4 box-shadow">
-                        <Link to={`/show/${book._id}`}>
+                        <Link to={`/book/${book._id}`}>
                           <img class="card-img-top" src={book.imageURL} alt="book" data-holder-rendered="true"/>
                         </Link>
                           <div class="card-body">
-                            <h5 class="card-title text-muted"><u>{book.title}</u></h5>
+                            <Link to={`/book/${book._id}`}>
+                              <h5 class="card-title text-muted"><u>{book.title}</u></h5>
+                            </Link>
                             <p class="card-text">{book.shortDescription}</p>
-                            <p class="text-success mb-3 mt-3">{book.price}$</p>
+                            {/* <p class="price mb-3 mt-3">{book.price}$</p> */}
+                            <p className="price">
+                            {new Intl.NumberFormat('de-DE', { 
+                                style: 'currency', 
+                                currency: 'USD' 
+                            }).format(book.price)}
+                            </p>
                             {/* <div class="d-flex justify-content-between align-items-center"> */}
                               {/* <div class="btn-group"> */}
-                                <Link to={`/show/${book._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
+                                <Link to={`/book/${book._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
                                 <button type="button" class="btn btn-sm btn-secondary">Add to Card</button>
                               {/* </div> */}
                             {/* </div> */}

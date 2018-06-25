@@ -20,13 +20,13 @@ export default class Home extends Component {
                     <img class="rounded-circle" src={require('./store.jpg')} width="140" height="140" alt="prod1"/>
                     <h2>Books</h2>
                     <p className="text-justify">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-                    <p><Link to="/all" class="btn btn-secondary">View books »</Link></p>
+                    <p><Link to="/catalog" class="btn btn-secondary">View books »</Link></p>
                   </div>
                   <div class="col-lg-4 text-center">
                     <img class="rounded-circle" src={require('./event.jpg')} width="140" height="140" alt="prod2"/>
                     <h2>Events</h2>
                     <p className="text-justify">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-                    <p><button class="btn btn-secondary">View events »</button></p>
+                    <p><Link to="/events" class="btn btn-secondary">View events »</Link></p>
                   </div>
                   <div class="col-lg-4 text-center">
                     <img class="rounded-circle" src={require('./g-map.jpg')} width="140" height="140" alt="prod3"/>
