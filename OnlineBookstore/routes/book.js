@@ -27,20 +27,22 @@ router.get('/', function(req, res, next) {
     });
   });
 
-// router.get('/', passport.authenticate('jwt', { session: false}), function(req, res) {
-//   var token = getToken(req.headers);
-//   if (token) {
-//     Book.find(function (err, books) {
-//       if (err) return next(err);
-//       res.json(books);
-//     });
-//   } else {
-//     return res.status(403).send({success: false, msg: 'Unauthorized.'});
-//   }
-// });
+
+  /* Get Books By Category */
+router.get('/category/:name', passport.authenticate('jwt', { session: false}), function(req, res, next) {
+  var token = getToken(req.headers);
+  if (token) {
+  Book.find({category:req.params.name} , req.body, function(err, products) {
+    if (err)return next(err);
+    res.json(products);
+  });
+} else {
+      return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    }
+});
 
 /* GET SINGLE BOOK BY ID */
-router.get('/:id', passport.authenticate('jwt', { session: false}), function(req, res) {
+router.get('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
     Book.findById(req.params.id, function (err, books) {
@@ -53,7 +55,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false}), function(req
 });
 
 /* SAVE BOOK */
-router.post('/', passport.authenticate('jwt', { session: false}), function(req, res) {
+router.post('/', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
     Book.create(req.body, function (err, post) {
@@ -66,7 +68,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), function(req, 
 });
 
 /* UPDATE BOOK */
-router.put('/:id', passport.authenticate('jwt', { session: false}), function(req, res) {
+router.put('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
     Book.findByIdAndUpdate(req.params.id,req.body, function (err, post) {
@@ -79,7 +81,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false}), function(req
 });
 
 /* DELETE BOOK */
-router.delete('/:id', passport.authenticate('jwt', { session: false}), function(req, res) {
+router.delete('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
     Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
@@ -90,5 +92,6 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}), function(
     return res.status(403).send({success: false, msg: 'Unauthorized.'});
   }
 });
+
 
 module.exports = router;

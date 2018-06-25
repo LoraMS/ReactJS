@@ -51,7 +51,7 @@ class Event extends Component {
             <h5><u>Details</u></h5>
             <p><strong>Date: </strong>{moment(this.state.event.eventDate).format('LL')}</p>
             <p><strong>Time: </strong>{this.state.event.hours}</p>
-            <p><strong>Event Category: </strong>{this.state.event.category}</p>
+            <p><strong>Event Category: </strong><Link to={`/evcategory/${this.state.event.category}`} className="category">{this.state.event.category}</Link></p>
             <Link to={`/editev/${this.state.event._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
             <button onClick={this.delete.bind(this, this.state.event._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
             {moment(this.state.event.eventDate).isSameOrAfter() > 0 && <button type="button" class="btn btn-sm btn-secondary mr-1">Participate</button>}

@@ -26,6 +26,19 @@ router.get('/', function(req, res, next) {
     }).sort({eventDate: -1});
   });
 
+   /* Get Events By Category */
+ router.get('/evcategory/:name', passport.authenticate('jwt', { session: false}), function(req, res, next) {
+  var token = getToken(req.headers);
+  if (token) {
+  Event.find({category:req.params.name} , req.body, function(err, ev) {
+    if (err)return next(err);
+    res.json(ev);
+  });
+} else {
+      return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    }
+});
+
 router.get('/:id', passport.authenticate('jwt', { session: false}), function(req, res) {
   var token = getToken(req.headers);
   if (token) {
@@ -73,5 +86,6 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}), function(
     return res.status(403).send({success: false, msg: 'Unauthorized.'});
   }
 });
+
 
 module.exports = router;

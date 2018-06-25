@@ -61,13 +61,13 @@ class Book extends Component {
             </div>
             <div class="details-content bg-light mb-3 p-3 border">
               <h5><u>Details</u></h5>
-              <p><strong>Category: </strong>{this.state.book.category}</p>
+              <p><strong>Category: </strong><Link to={`/category/${this.state.book.category}`} className="category">{this.state.book.category}</Link></p>
               <p><strong>Tags: </strong>React, Web Development</p>
               <p><strong>Publisher: </strong>{this.state.book.publisher}</p>
               <p><strong>Year of publishing: </strong>{this.state.book.publishedYear}</p>
               <p><strong>Product ID: </strong>{this.state.book.isbn}</p>
               <div class="mt-3">
-                  <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary">Edit</Link>&nbsp;
+                <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
                 <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
                 <button type="button" class="btn btn-sm btn-secondary mr-1">Add to Card</button>
                 <button type="button" class="btn btn-sm btn-secondary">Add to Wish List</button>

@@ -17,6 +17,8 @@ import CreateEvent from './components/create_event/CreateEvent';
 import Events from './components/events/Events';
 import Event from './components/event/Event';
 import EditEvent from './components/edit_event/EditEvent';
+import CategoryBook from './components/category/CategoryBook';
+import CategoryEvent from './components/category/CategoryEvent';
 
 class App extends Component {
   constructor(props) {
@@ -43,6 +45,8 @@ class App extends Component {
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/category/:name' component={CategoryBook} />
+          <Route path='/evcategory/:name' component={CategoryEvent} />
           <Route path='/catalog' component={Catalog} />
           <Route path='/edit/:id' component={Edit} />
           <Route path='/create' component={Create} />
@@ -65,10 +69,10 @@ export default App;
 /*
 1.from package.json/scripts was removed
 // "start": "node ./bin/www" to use with npm run build
-//now "react-scripts-start"
+//now "react-scripts start"
 
 2.then added
-"proxy": "http://localhost:3000",
+"proxy": "http://localhost:3001",
 
 3.then uncommented row 8 and row 64 from app.js
 

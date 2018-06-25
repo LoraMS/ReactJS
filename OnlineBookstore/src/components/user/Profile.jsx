@@ -13,7 +13,7 @@ export default class Profile extends Component {
                             <div class="card-body">
                                 <h5 class="card-title">User Profile Information</h5>
                                 <p class="card-text"><strong>Username: </strong>{name}</p>
-                                <p class="card-text"><strong>My Favorites: </strong><span class="badge badge-secondary"></span></p>
+                                <p class="card-text"><strong>My Books List: </strong><span class="badge badge-secondary"></span></p>
                                 <p class="card-text"><strong>My Events: </strong><span class="badge badge-secondary"></span></p>
                             </div>
                         </div>

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import './Events.css';
+import './../events/Events.css';
 
-class Events extends Component {
+export default class CategoryEvent extends Component {
     constructor(props){
         super(props);
         this.state= {
@@ -13,7 +13,8 @@ class Events extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/event')
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+        axios.get('/api/event/evcategory/' + this.props.match.params.name)
           .then(res => {
             this.setState({ events: res.data });
           })
@@ -28,7 +29,7 @@ class Events extends Component {
         moment.locale('en');
         return(
             <div className="container">
-                <h2 class="event-title">Events</h2>
+                <h2 class="event-title">Events in Category {this.props.match.params.name}</h2>
                 {this.state.events.map((event)=> {
                     if(moment(event.eventDate).isSameOrAfter()){
                         return (                               
@@ -76,10 +77,3 @@ class Events extends Component {
         );
     }
 }
-
-export default Events;
-                              
-
-
-        
-      

@@ -11,3 +11,11 @@
     color: green;
     font-weight: bold;
 }
+
+a.category{
+    color: darkseagreen;
+  }
+  
+a.category:hover{
+    color: olivedrab;
+  }
