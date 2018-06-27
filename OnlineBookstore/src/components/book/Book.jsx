@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './Book.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import AddComment from './../add_comment/AddComment';
+import Comment from './../comment/Comment';
 
 class Book extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      book: {},
     };
   }
 
@@ -33,6 +34,7 @@ class Book extends Component {
   }
 
   render() {
+    const rArray = this.state.book.reviews || [];
     return (
       <div class="container">
         <div class="panel">
@@ -73,10 +75,19 @@ class Book extends Component {
                 <button type="button" class="btn btn-sm btn-secondary">Add to Wish List</button>
                   </div>
             </div>
-            <div class="reviews-content bg-light p-3 border">
-              <h5><u>Reviews</u></h5>
-              <div>Lorem ipsum</div>
+            <div class="reviews-form bg-light p-3 mb-3 border">
+              <h5><u>Add Review</u></h5>
+              <div className="review-add">
+                <AddComment id={this.props.match.params.id}/>
+              </div>
             </div>
+            <div class="reviews-content bg-light p-3 mb-3 border">
+              <h5><u>Reviews</u></h5>
+              {rArray.length === 0 && <div>This book has no reviews yet.</div> }
+              {rArray.length > 0 && rArray.map((review) => {
+                 return <Comment key={review._id} props={review}/>;
+              })}
+            </div> 
       </div>
     </div>
     );

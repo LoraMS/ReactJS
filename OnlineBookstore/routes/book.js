@@ -19,7 +19,7 @@ getToken = function (headers) {
   }
 };
 
-/* GET ALL BOOKS */
+/* Get All Books */
 router.get('/', function(req, res, next) {
     Book.find(function (err, products) {
       if (err) return next(err);
@@ -41,7 +41,7 @@ router.get('/category/:name', passport.authenticate('jwt', { session: false}), f
     }
 });
 
-/* GET SINGLE BOOK BY ID */
+/* Get Single Book by Id */
 router.get('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
@@ -54,7 +54,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false}), function(req
   }
 });
 
-/* SAVE BOOK */
+/* Save Book */
 router.post('/', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
@@ -67,7 +67,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), function(req, 
   }
 });
 
-/* UPDATE BOOK */
+/* Update Book */
 router.put('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
@@ -80,7 +80,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false}), function(req
   }
 });
 
-/* DELETE BOOK */
+/* Delete Book */
 router.delete('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
@@ -93,5 +93,28 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}), function(
   }
 });
 
+/* Add comment */
+router.put('/:id/comments', passport.authenticate('jwt', { session: false}), function(req, res, next) {
+  var token = getToken(req.headers);
+  if (token) {
+    Book.findById(req.params.id, function (err, book) {
+      if (err) { return next(err); }
+      if (!book) { return res.send(404); }
+      var author = req.body.author;
+      var content = req.body.content;
+      book.reviews.push({author, content});
+      book.save(function (err, updated) {
+        if (err) { return next(err); }
+        res.send(updated);
+      });
+      // book.reviews = book.reviews || [];
+      // book.reviews.push(req.body);
+      // console.log(req.body)// { author: 'user', content: 'hello' }
+      // res.json(book);
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
+});
 
 module.exports = router;

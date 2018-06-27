@@ -32,6 +32,11 @@ body {
   margin-top: 10px;
 }
 
+input[type="submit"]{
+  padding: 5px 10px;
+  margin-left: 17vw;
+} 
+
 button.btn {
   background-color: darkseagreen;
 }
