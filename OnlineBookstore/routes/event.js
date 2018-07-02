@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
   Event.find({category:req.params.name} , req.body, function(err, ev) {
     if (err)return next(err);
     res.json(ev);
-  });
+  }).sort({eventDate: -1});
 } else {
       return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }

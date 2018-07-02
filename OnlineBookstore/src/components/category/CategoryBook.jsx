@@ -37,7 +37,7 @@ export default class CategoryBook extends Component {
                 <div class="container">
                   <div class="row">
                   {this.state.books.map(book =>
-                    <div class="col-md-3">
+                    <div class="col-md-3" key={book._id}>
                       <div class="card mb-3 bg-light">
                         <Link to={`/book/${book._id}`}>
                           <img class="card-img-top" src={book.imageURL} alt="book" data-holder-rendered="true"/>

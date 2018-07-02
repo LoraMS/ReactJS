@@ -10,11 +10,13 @@ class Book extends Component {
     super(props);
     this.state = {
       book: {},
+      add: '',
     };
   }
 
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+    const name = localStorage.getItem('name');
     axios.get('/api/book/'+this.props.match.params.id)
       .then(res => {
         this.setState({ book: res.data });
@@ -24,6 +26,17 @@ class Book extends Component {
           this.props.history.push("/login");
         }
       });
+
+      axios.get('/api/auth/all/' + name)
+        .then(res => {
+          const currentUser = res.data;
+          const index = currentUser.bookList.findIndex(b=> b.bookId === this.props.match.params.id);
+          if(index > -1){
+            this.setState({ add: false });
+          } else {
+          this.setState({ add: true });
+          }
+        });
   }
 
   delete(id){
@@ -33,8 +46,39 @@ class Book extends Component {
       });
   }
 
+  bookAction(bookId, title){
+    const name = localStorage.getItem('name');
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+    if (!this.state.add) {
+      axios.put('/api/auth/remove', {bookId, name})
+      .then((result) => {
+        this.setState({
+          add: true
+        });
+      })
+      .catch((error) => {
+             if(error.response.status === 401) {
+             this.props.history.push("/login");
+            }
+      });
+    } else {
+      axios.put('/api/auth/add', {bookId, title, name})
+      .then((result) => {
+        this.setState({
+          add: false
+        });
+      })
+      .catch((error) => {
+             if(error.response.status === 401) {
+             this.props.history.push("/login");
+            }
+      });
+    }
+  }
+
   render() {
     const rArray = this.state.book.reviews || [];
+    const label = this.state.add ?  'Add to' : 'Remove from';
     return (
       <div class="container">
         <div class="panel">
@@ -72,7 +116,7 @@ class Book extends Component {
                 <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
                 <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
                 <button type="button" class="btn btn-sm btn-secondary mr-1">Add to Card</button>
-                <button type="button" class="btn btn-sm btn-secondary">Add to Wish List</button>
+                <button onClick={this.bookAction.bind(this, this.state.book._id, this.state.book.title)} type="button" className="btn btn-sm btn-secondary">{label} Wish List</button>
                   </div>
             </div>
             <div class="reviews-form bg-light p-3 mb-3 border">

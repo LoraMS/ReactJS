@@ -9,6 +9,7 @@ const cors = require('cors');
 
 const book = require('./routes/book');
 const event = require('./routes/event');
+
 const app = express();
 
 const auth = require('./routes/auth');
@@ -32,18 +33,6 @@ app.use('/api/book', book);
 app.use('/api/event', event);
 
 app.use('/api/auth', auth);
-
-app.post('/upload', (req, res, next) => {
-  let imageFile = req.files.file;
-
-  imageFile.mv(`${__dirname}/public/${req.body.filename}`, function(err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.json({file: `public/${req.body.filename}`});
-  });
-
-})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

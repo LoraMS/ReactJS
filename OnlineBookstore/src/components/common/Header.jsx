@@ -6,6 +6,7 @@ export default class Header extends Component {
         const { loggedIn, onLogout } = this.props;
 
         return(
+            <header>
             <nav class="nav container">
                 <Link className="logo nav-link" to="/"><span>The Bookstore</span></Link>
                 <NavLink exact to="/" activeClassName="active" className="nav nav-link">Home</NavLink>
@@ -25,6 +26,7 @@ export default class Header extends Component {
                 {loggedIn && <NavLink to="/profile" activeClassName="active" className="nav  nav-link">Profile</NavLink>}
                 {loggedIn && <a href="javascript:void(0)" onClick={onLogout} className="nav nav-link">Logout</a>}
             </nav>
+            </header>
         );
     }
 }

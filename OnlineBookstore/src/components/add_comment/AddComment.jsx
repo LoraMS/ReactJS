@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router';
 import axios from 'axios';
 import './AddComment.css';
 
@@ -29,15 +30,14 @@ class AddComment extends Component{
     onSubmit(e){
         e.preventDefault();
         const {author, content} = this.state;
-
         axios.put(`/api/book/${this.props.id}/comments` , {author, content})
         .then((result) => {
-            window.location.reload();
+             window.location.reload();
         })
         .catch((error) => {
-            if(error.response.status === 401) {
-              this.setState({ message: 'Add Comment failed. Check the form for errors' });
-            }
+            // if(error.response.status === 401) {
+            //   this.setState({ message: 'Add Comment failed. Check the form for errors' });
+            // }
             console.log(error);
         });
     }
@@ -54,4 +54,4 @@ class AddComment extends Component{
         );
     }
 }
-export default AddComment;
+export default withRouter(AddComment);

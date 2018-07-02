@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 
 export default class PrivateRoute extends Component{
     render(){
-        if(localStorage.getItem('token') === null){
+        if(localStorage.getItem('role') === 'read'){
             return <Redirect to="/login" />;
         }
 

@@ -19,6 +19,8 @@ import Event from './components/event/Event';
 import EditEvent from './components/edit_event/EditEvent';
 import CategoryBook from './components/category/CategoryBook';
 import CategoryEvent from './components/category/CategoryEvent';
+import UserList from './components/user/UserList';
+import PageNotFound from './components/common/PageNotFound';
 
 class App extends Component {
   constructor(props) {
@@ -27,15 +29,18 @@ class App extends Component {
     this.onLogout = this.onLogout.bind(this);
   }
 
-  onLogout() {
-    localStorage.removeItem('jwtToken');
-    // window.location.reload();
-    window.location.replace('/');
-  } 
-
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
   }
+
+  onLogout() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+    // window.location.reload();
+    window.location.replace('/');
+  } 
 
   render() {
     return (
@@ -57,6 +62,8 @@ class App extends Component {
           <Route path='/event/:id' component={Event} />
           <Route path='/about' component={About} />
           <Route path='/profile' component={Profile} />
+          <Route path='/list' component={UserList} />
+          <Route path="*" component={PageNotFound}/>
         </Switch>
         <Footer />
         </div>

@@ -33,7 +33,7 @@ export default class CategoryEvent extends Component {
                 {this.state.events.map((event)=> {
                     if(moment(event.eventDate).isSameOrAfter()){
                         return (                               
-                            <div class="row mt-3 pt-2 pb-2 bg-light">
+                <div class="row mt-3 pt-2 pb-2 bg-light" key={event._id}>
                     <div className="col-md-2">
                          <Link to={`/event/${event._id}`}>
                              <img class="events-img" src={event.imageURL} alt="event" data-holder-rendered="true"/>
@@ -52,7 +52,7 @@ export default class CategoryEvent extends Component {
                         );
                     } else {
                         return(
-                            <div class="row mt-3 pt-2 pb-2 bg-light">
+                        <div class="row mt-3 pt-2 pb-2 bg-light" key={event._id}>
                             <div className="col-md-2">
                                 <Link to={`/event/${event._id}`}>
                                     <img class="events-img" src={event.imageURL} alt="event" data-holder-rendered="true"/>

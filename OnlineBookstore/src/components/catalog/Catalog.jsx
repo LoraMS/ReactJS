@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Catalog.css';
+// import ShoppingCart from './../shopping_cart/ShoppingCart';
 
 export default class Catalog extends Component {
     constructor(props){
@@ -33,12 +34,13 @@ export default class Catalog extends Component {
                 <h2 class="page-title">
                   Book Catalog
                 </h2>
+                {/* <ShoppingCart /> */}
               </div>
               <div class="album py-5">
                 <div class="container">
                   <div class="row">
                   {this.state.books.map(book =>
-                    <div class="col-md-3">
+                    <div class="col-md-3" key={book._id}>
                       <div class="card mb-3 bg-light">
                         <Link to={`/book/${book._id}`}>
                           <img class="card-img-top" src={book.imageURL} alt="book" data-holder-rendered="true"/>

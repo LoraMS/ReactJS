@@ -8,12 +8,14 @@ class Event extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          event: {}
+          event: {},
+          participate: '',
         };
       }
 
     componentDidMount () {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+        const name = localStorage.getItem('name');
         axios.get('/api/event/' + this.props.match.params.id)
         .then(res => {
             this.setState({ event: res.data });
@@ -23,17 +25,59 @@ class Event extends Component {
               this.props.history.push("/login");
             }
           });
+
+        axios.get('/api/auth/all/' + name)
+        .then(res => {
+          const currentUser = res.data;
+          const index = currentUser.eventList.findIndex(e=> e.eventId === this.props.match.params.id);
+          if(index > -1){
+            this.setState({ participate: false });
+          } else {
+          this.setState({ participate: true });
+          }
+        });
      }
 
     delete(id){
-        axios.delete('/api/event/'+id)
-          .then((result) => {
-            this.props.history.push("/events")
-          });
+      axios.delete('/api/event/'+id)
+        .then((result) => {
+          this.props.history.push("/events");
+        });
       }
+
+    eventAction(eventId, title){
+      const name = localStorage.getItem('name');
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+      if (!this.state.participate) {
+        axios.put('/api/auth/leave', {eventId, name})
+        .then((result) => {
+          this.setState({
+            participate: true
+          });
+        })
+        .catch((error) => {
+               if(error.response.status === 401) {
+               this.props.history.push("/login");
+              }
+        });
+      } else {
+        axios.put('/api/auth/participate', {eventId, title, name})
+        .then((result) => {
+          this.setState({
+            participate: false
+          });
+        })
+        .catch((error) => {
+               if(error.response.status === 401) {
+               this.props.history.push("/login");
+              }
+        });
+      }
+    }
 
     render() {
         moment.locale('en');
+        const label = this.state.participate ?  'Participate' : 'Leave';
         return(
             <div className="container">
             <h3 className="event-title">{this.state.event.title}</h3>
@@ -52,9 +96,9 @@ class Event extends Component {
             <p><strong>Date: </strong>{moment(this.state.event.eventDate).format('LL')}</p>
             <p><strong>Time: </strong>{this.state.event.hours}</p>
             <p><strong>Event Category: </strong><Link to={`/evcategory/${this.state.event.category}`} className="category">{this.state.event.category}</Link></p>
-            <Link to={`/editev/${this.state.event._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
-            <button onClick={this.delete.bind(this, this.state.event._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
-            {moment(this.state.event.eventDate).isSameOrAfter() > 0 && <button type="button" class="btn btn-sm btn-secondary mr-1">Participate</button>}
+            <Link to={`/editev/${this.state.event._id}`} className="btn btn-sm btn-secondary mr-1">Edit</Link>
+            <button onClick={this.delete.bind(this, this.state.event._id)} className="btn btn-sm btn-secondary mr-1">Delete</button>
+            {moment(this.state.event.eventDate).isSameOrAfter() > 0 && <button onClick={this.eventAction.bind(this, this.state.event._id, this.state.event.title)} type="button" className="btn btn-sm btn-secondary mr-1">{label}</button>}
             </div>
             </div>
           );

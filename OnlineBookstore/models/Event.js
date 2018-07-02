@@ -9,7 +9,7 @@ var EventSchema = new mongoose.Schema({
     hours: String,
     imageURL: String,
     category: String,
-    reviews: [{ type: String }],
+    reviews: [],
     published_date: { type: Date, default: Date.now },
   });
 

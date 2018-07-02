@@ -15,7 +15,20 @@ var UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    role: {
+        type: String,
+        default: 'read',
+        required: true
+      },
+    bookList: [{ 
+      title: String,
+      bookId: String,
+    }],
+    eventList: [{ 
+      title: String,
+      eventId: String,
+    }],
 });
 
 UserSchema.pre('save', function (next) {
