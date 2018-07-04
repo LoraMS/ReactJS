@@ -2,39 +2,69 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Catalog.css';
-// import ShoppingCart from './../shopping_cart/ShoppingCart';
+import {withRouter} from 'react-router';
 
-export default class Catalog extends Component {
-    constructor(props){
-        super(props);
-        this.state= {
-            books: []
+class Catalog extends Component {
+  constructor(props){
+    super(props);
+      this.state= {
+        books: [],
+        selectedBook: {},
+        isAdded: false
         };
     }
 
-    componentDidMount() {
-        axios.get('/api/book')
-          .then(res => {
-            this.setState({ books: res.data });
-          })
-          .catch((error) => {
-            if(error.response.status === 401) {
-              this.props.history.push("/");
-            }
-          });
+  componentDidMount() {
+    axios.get('/api/book')
+      .then(res => {
+        this.setState({ books: res.data });
+      })
+    .catch((error) => {
+      if(error.response.status === 401) {
+        this.props.history.push("/");
       }
+    });
+  }
+
+  addToCart(image, title, price, id) {
+    this.setState({
+      selectedBook: {
+        image: image,
+        title: title,
+        price: price,
+        id: id,
+      }
+    }, function(){
+        this.props.addToCart(this.state.selectedBook);
+    })
+    
+    this.setState({
+        isAdded: true
+    }, function(){
+        setTimeout(() => {
+            this.setState({
+                isAdded: false,
+                selectedBook: {} 
+            });
+        }, 3500);
+    });
+  }
 
       render() {
         return (
           <div class="container">
             <div class="panel">
-              <div>
+              <div className="row">
                 {/* https://drive.google.com/file/d/1GXHsmI8OnoI1NzBmPydOD5ffiCBnW8HD/view?usp=sharing" 
                     https://drive.google.com/thumbnail?id=1GXHsmI8OnoI1NzBmPydOD5ffiCBnW8HD*/}
-                <h2 class="page-title">
-                  Book Catalog
-                </h2>
-                {/* <ShoppingCart /> */}
+                <div className="col-md-4">
+                  <h2 class="page-title">Book Catalog</h2>
+                </div>
+                <div className="col-md-4">
+                    
+                </div>
+                <div className="col-md-4">
+                </div>
               </div>
               <div class="album py-5">
                 <div class="container">
@@ -50,7 +80,6 @@ export default class Catalog extends Component {
                               <h5 class="card-title text-muted"><u>{book.title}</u></h5>
                             </Link>
                             <p class="card-text">{book.shortDescription}</p>
-                            {/* <p class="price mb-3 mt-3">{book.price}$</p> */}
                             <p className="price">
                             {new Intl.NumberFormat('de-DE', { 
                                 style: 'currency', 
@@ -58,7 +87,7 @@ export default class Catalog extends Component {
                             }).format(book.price)}
                             </p>
                                 <Link to={`/book/${book._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
-                                <button type="button" class="btn btn-sm btn-secondary">Add to Card</button>
+                                <button type="button" className={!this.state.isAdded ? "btn btn-sm btn-secondary" : "btn btn-sm btn-secondary added"} onClick={this.addToCart.bind(this, book.imageURL, book.title, book.price, book._id)}>{!this.state.isAdded ? "Add to Cart" : "✔ Added"}</button>
                           </div>
                       </div>
                     </div>
@@ -71,3 +100,5 @@ export default class Catalog extends Component {
         );
       }
 }
+
+export default withRouter(Catalog);

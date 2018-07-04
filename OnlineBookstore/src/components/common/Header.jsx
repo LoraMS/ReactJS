@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import ShoppingCart from '../shopping_cart/ShoppingCart';
 
 export default class Header extends Component {
     render(){
-        const { loggedIn, onLogout } = this.props;
+        const { loggedIn, onLogout, total, totalItems, cartItems, removeBook } = this.props;
 
         return(
             <header>
@@ -15,9 +16,8 @@ export default class Header extends Component {
                 <NavLink to="/about" activeClassName="active" className="nav nav-link">Contact Us</NavLink>
                 {!loggedIn && <NavLink to="/register" activeClassName="active" className="nav nav-link">Register</NavLink>}
                 {!loggedIn && <NavLink to="/login" activeClassName="active" className="nav nav-link">Login</NavLink>}
-                {/* {loggedIn && <NavLink to="/create" activeClassName="active" className="nav  nav-link">Create</NavLink>} */}
                 {loggedIn && <div className="dropdown">
-                <button className="btn dropdown-toggle btn-header" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</button>
+                <button className="btn dropdown-toggle btn-header" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <Link to="/create" class="dropdown-item nav nav-link">Book</Link>
                     <Link to="/add" class="dropdown-item nav nav-link">Event</Link>
@@ -25,6 +25,7 @@ export default class Header extends Component {
                 </div>}
                 {loggedIn && <NavLink to="/profile" activeClassName="active" className="nav  nav-link">Profile</NavLink>}
                 {loggedIn && <a href="javascript:void(0)" onClick={onLogout} className="nav nav-link">Logout</a>}
+                {loggedIn && <ShoppingCart total={total} totalItems={totalItems} cart={cartItems} removeBook={removeBook} />}
             </nav>
             </header>
         );

@@ -116,7 +116,7 @@ class Book extends Component {
                 <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
                 <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
                 <button type="button" class="btn btn-sm btn-secondary mr-1">Add to Card</button>
-                <button onClick={this.bookAction.bind(this, this.state.book._id, this.state.book.title)} type="button" className="btn btn-sm btn-secondary">{label} Wish List</button>
+                <button onClick={this.bookAction.bind(this, this.state.book._id, this.state.book.title)} type="button" className="btn btn-sm btn-secondary">{label} Book List</button>
                   </div>
             </div>
             <div class="reviews-form bg-light p-3 mb-3 border">

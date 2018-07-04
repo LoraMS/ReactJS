@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Counter from './Counter';
 import EmptyCart from './EmptyCart';
-import {findDOMNode} from 'react-dom';
+import './ShoppingCart.css';
 
 export default class ShoppingCart extends Component{
     constructor(props){
@@ -9,7 +8,7 @@ export default class ShoppingCart extends Component{
 
         this.state = {
             showCart: false,
-            // cart: this.props.cartItems,
+            cart: this.props.cart,
         };
      }
     handleCart(e){
@@ -19,78 +18,57 @@ export default class ShoppingCart extends Component{
         })
     }
 
-    handleSubmit(e){
-        e.preventDefault();
-    }
+    // handleSubmit(e){
+    //     e.preventDefault();
+    // }
 
-    // handleClickOutside(event) {
-    //     const cartNode = findDOMNode(this.refs.cartPreview);
-    //     const buttonNode = findDOMNode(this.refs.cartButton);
-    //     if(cartNode.classList.contains('active')){
-    //         if (!cartNode || !cartNode.contains(event.target)){
-    //             this.setState({
-    //                 showCart: false
-    //             })
-    //             event.stopPropagation();
-    //         }
-    //     } 
-    // }
-    // componentDidMount() {
-    //   document.addEventListener('click', this.handleClickOutside.bind(this), true);
-    // }
-    // componentWillUnmount() {
-    //   document.removeEventListener('click', this.handleClickOutside.bind(this), true);
-    // }
     render(){
-        // let cartItems;
-        // cartItems = this.state.cart.map(product =>{
-		// 	return(
-		// 		<li className="cart-item" key={product.name}>
-        //             <img className="product-image" src={product.image} />
-        //             <div className="product-info">
-        //                 <p className="product-name">{product.name}</p>
-        //                 <p className="product-price">{product.price}</p>
-        //             </div>
-        //             <div className="product-total">
-        //                 <p className="quantity">{product.quantity} {product.quantity > 1 ?"Nos." : "No." } </p>
-        //                 <p className="amount">{product.quantity * product.price}</p>
-        //             </div>
-        //             <a className="product-remove" href="#" onClick={this.props.removeProduct.bind(this, product.id)}>×</a>
-        //         </li>
-		// 	)
-		// });
-        // let view;
-        // if(cartItems.length <= 0){
-		// 	view = <EmptyCart />
-		// } else{
-		// 	view = ''
-		// }
+        let cartItems = this.state.cart;
+        let view;
+        if(cartItems.length <= 0){
+			view =  <EmptyCart />
+		} else{
+                view =  this.state.cart.map(book =>
+                        <li className="cart-item" key={book.id}>
+                            <img className="product-image" src={book.image} />
+                            <div className="product-info">
+                                <p className="product-name">{book.title}</p>
+                                <p className="product-price">{book.price}</p>
+                            </div>
+                            <div className="product-total">
+                                <p className="amount">{book.price}</p>
+                            </div>
+                            <button type="button" className="product-remove close" aria-label="Close" onClick={this.props.removeBook.bind(this, book.id)}>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </li>
+                    )
+                }
         return(
             <div className="cart"> 
                         <div className="cart-info">
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>No. of items</td>
+                                        <td>Items</td>
                                         <td>:</td>
-                                        <td><strong></strong></td>
+                                        <td><strong>{this.props.totalItems}</strong></td>
                                     </tr>
                                     <tr>
-                                        <td>Sub Total</td>
+                                        <td>Total</td>
                                         <td>:</td>
-                                        <td><strong></strong></td>
+                                        <td><strong>{this.props.total}$</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <a className="cart-icon" href="#" onClick={this.handleCart.bind(this)} ref="cartButton">
-                            <img src="https://res.cloudinary.com/sivadass/image/upload/v1493548928/icons/bag.png" alt="Cart"/>
-                            {/* {this.props.totalItems ? <span className="cart-count">{this.props.totalItems}</span> : "" } */}
+                            <img src="https://drive.google.com/thumbnail?id=1IfEA5dFnBrWdngo7Hy6jslTHIftYg7IR" alt="Cart"/>
                         </a>
                         <div className={this.state.showCart ? "cart-preview active" : "cart-preview"} ref="cartPreview">
-
+                        {view}
                             <div className="action-block">
-                                <button type="button" >PROCEED TO CHECKOUT</button>
+                                <button type="button" className={this.state.cart.length > 0 ? "btn btn-lg btn-secondary" : "btn btn-lg btn-secondary disabled"}>CHECKOUT</button>
                             </div>
                         </div>
                     </div>

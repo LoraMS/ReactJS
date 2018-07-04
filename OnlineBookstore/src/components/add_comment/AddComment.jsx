@@ -32,7 +32,8 @@ class AddComment extends Component{
         const {author, content} = this.state;
         axios.put(`/api/book/${this.props.id}/comments` , {author, content})
         .then((result) => {
-             window.location.reload();
+            //  window.location.reload();
+             this.props.history.go(0);
         })
         .catch((error) => {
             // if(error.response.status === 401) {

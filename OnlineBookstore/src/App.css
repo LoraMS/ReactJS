@@ -1,34 +1,17 @@
-.App {
-  /* background-image: url('./bg.jpg');
-  height: 100%; 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-}
-
-.logo{
-  margin-right: 5vw;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.8em;
-}
-
+/* header style */
 .nav{
-  margin-right: 20px;
   font-size: 1em;
   padding: 0.5em 1em;
   text-decoration: none;
 }
 
 .active{
-  /* background-color: rgb(148, 185, 105); */
-  /* color: white; */
   text-decoration: none;
 }
 
 .nav-link{
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1em;
   color: darkseagreen;
 }
 
@@ -36,6 +19,35 @@
   color: olivedrab;
 }
 
+.logo{
+  margin-right: 4vw;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.6em;
+}
+
+button.btn.btn-header{
+  background-color: #fff;
+  border: none;
+  color: darkseagreen;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+button.btn.btn-header:hover{
+  background-color: #fff;
+  border: none;
+  color: olivedrab;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+a.dropdown-item{
+  color: darkseagreen;
+  font-weight: bold;
+}
+
+/* main style */
 .container{
   margin: 0 auto;
   padding: 20px 0;
@@ -55,28 +67,9 @@
   width: 10vw;
 }
 
+/* footer style */
 .page-footer{
   height: 50px;
   margin-top: -50px;
   line-height: 50px;
-}
-
-button.btn.btn-header{
-  background-color: #fff;
-  border: none;
-  color: darkseagreen;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-button.btn.btn-header:hover{
-  background-color: #fff;
-  border: none;
-  color: olivedrab;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-a.dropdown-item{
-  color: darkseagreen;
 }

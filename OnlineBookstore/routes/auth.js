@@ -73,7 +73,6 @@ router.get('/all/:name', passport.authenticate('jwt', { session: false}), functi
   if (token) {
     User.findOne({username: req.params.name}, function (err, user) {
       if (err) return next(err);
-      console.log(user);
       res.json(user);
     });
   } else {

@@ -28,3 +28,7 @@ a.btn:hover{
   color: green;
   font-weight: bold;
 }
+
+.added{
+  transition: all 300ms ease-in;
+}
