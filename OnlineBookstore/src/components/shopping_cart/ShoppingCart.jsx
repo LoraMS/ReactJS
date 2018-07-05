@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EmptyCart from './EmptyCart';
+import NonEmptyCart from './NonEmptyCart';
 import './ShoppingCart.css';
 
 export default class ShoppingCart extends Component{
@@ -8,9 +9,10 @@ export default class ShoppingCart extends Component{
 
         this.state = {
             showCart: false,
-            cart: this.props.cart,
+            // cart: this.props.cart,
         };
      }
+
     handleCart(e){
         e.preventDefault();
         this.setState({
@@ -18,31 +20,15 @@ export default class ShoppingCart extends Component{
         })
     }
 
-    // handleSubmit(e){
-    //     e.preventDefault();
-    // }
-
     render(){
-        let cartItems = this.state.cart;
+        let cartItems = this.props.cart;
         let view;
         if(cartItems.length <= 0){
-			view =  <EmptyCart />
+			view = <EmptyCart />
 		} else{
-                view =  this.state.cart.map(book =>
-                        <li className="cart-item" key={book.id}>
-                            <img className="product-image" src={book.image} />
-                            <div className="product-info">
-                                <p className="product-name">{book.title}</p>
-                                <p className="product-price">{book.price}</p>
-                            </div>
-                            <div className="product-total">
-                                <p className="amount">{book.price}</p>
-                            </div>
-                            <button type="button" className="product-remove close" aria-label="Close" onClick={this.props.removeBook.bind(this, book.id)}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </li>
-                    )
+            view =  <NonEmptyCart 
+                    cart={this.props.cart} 
+                    removeBook={this.props.removeBook} />
                 }
         return(
             <div className="cart"> 
@@ -66,9 +52,14 @@ export default class ShoppingCart extends Component{
                             <img src="https://drive.google.com/thumbnail?id=1IfEA5dFnBrWdngo7Hy6jslTHIftYg7IR" alt="Cart"/>
                         </a>
                         <div className={this.state.showCart ? "cart-preview active" : "cart-preview"} ref="cartPreview">
-                        {view}
+                            {view}
                             <div className="action-block">
-                                <button type="button" className={this.state.cart.length > 0 ? "btn btn-lg btn-secondary" : "btn btn-lg btn-secondary disabled"}>CHECKOUT</button>
+                                {this.props.cart.length > 0  && <div className="row mb-3">
+                                    <div className="col-md-4"><strong>Total</strong></div>
+                                    <div className="col-md-4"><strong>{this.props.totalItems}</strong></div>
+                                    <div className="col-md-4"><strong>{this.props.total} $</strong></div>
+                                </div>}
+                                <button type="button" className={this.props.cart.length > 0 ? "btn btn-lg btn-secondary" : "btn btn-lg btn-secondary disabled"} onClick={this.props.checkout}>Checkout</button>
                             </div>
                         </div>
                     </div>

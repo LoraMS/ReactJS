@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Comment.css';
 import moment from 'moment';
+import './Comment.css';
 
 class Comment extends Component{
     constructor(props){

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Event.css';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import './Event.css';
 
 class Event extends Component {
     constructor(props) {

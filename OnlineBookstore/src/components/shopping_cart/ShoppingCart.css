@@ -105,7 +105,7 @@ td{
 /* cart items */
 .cart-items{
     height: 320px;
-    width: 360px;
+    width: 360px; 
 }
 .cart-item{
     display: flex;
@@ -113,52 +113,53 @@ td{
     align-items: center;
     -webkit-align-items: center;
     padding: 8px;
+    border-bottom: 1px solid lightgray;
 }
 
 .cart-item:hover{
     background: rgb(248, 248, 248);
 }
 
-.cart-item .product-image{
+.cart-item .book-image{
     width: 48px;
     height: 48px;
 }
 
-.cart-item .product-info{
+.cart-item .book-info{
     margin-left: 16px;
     flex-grow: 1;
 }
 
-.cart-item .product-info .product-name{
+.cart-item .book-info .book-title{
     color: gray;
     font-size: 14px;
 }
 
-.cart-item .product-info .product-price{
+.cart-item .book-info .book-price{
     color: gray;
     font-weight: 700;
 }
 
-.cart-item .product-info .product-price:before{
+.cart-item .book-info .book-price:before{
     content: "$ "
 }
 
-.cart-item .product-total{
+.cart-item .book-total{
     margin-left: 16px;
 }
 
 
-.cart-item .product-total .amount{
+.cart-item .book-total .amount{
     color: gray;
     font-weight: 700;
     text-align: right;
 }
 
-.cart-item .product-total .amount:before{
+.cart-item .book-total .amount:before{
     content: "$ "
 }
 
-.cart-item .product-remove{
+.cart-item .book-remove{
     margin-left: 24px;
     height: 24px;
     line-height: 24px;
@@ -168,6 +169,6 @@ td{
     text-align: center;
 }
 
-.cart-item .product-remove:hover{
+.cart-item .book-remove:hover{
     color: red;
 }

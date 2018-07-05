@@ -37,7 +37,8 @@ class App extends Component {
 		this.sumTotalItems = this.sumTotalItems.bind(this);
 		this.sumTotalAmount = this.sumTotalAmount.bind(this);
 		this.checkBook = this.checkBook.bind(this);
-		this.handleRemoveBook = this.handleRemoveBook.bind(this);
+    this.handleRemoveBook = this.handleRemoveBook.bind(this);
+    this.handleCheckout = this.handleCheckout.bind(this);
 
     this.onLogout = this.onLogout.bind(this);
   }
@@ -86,6 +87,14 @@ class App extends Component {
       this.sumTotalAmount(this.state.cart);
       e.preventDefault();
   }
+
+  handleCheckout(){
+    this.setState({
+        cart: [],
+        totalAmount: 0,
+        totalItems: 0
+      });
+  }
       
   checkBook(bookId){
     const cart = this.state.cart;
@@ -129,6 +138,7 @@ class App extends Component {
         totalItems={this.state.totalItems}
         cartItems={this.state.cart}
         removeBook={this.handleRemoveBook}
+        checkout={this.handleCheckout}
         onLogout={ this.onLogout } 
         />
         <Switch>
@@ -140,7 +150,7 @@ class App extends Component {
           <Route path='/catalog' render={()=><Catalog addToCart={this.handleAddToCart}/>} />
           <Route path='/edit/:id' component={Edit} />
           <Route path='/create' component={Create} />
-          <Route path='/book/:id' component={Book} />
+          <Route path='/book/:id' render={()=><Book addToCart={this.handleAddToCart}/>} />
           <Route path='/events' component={Events} />
           <Route path='/add' component={CreateEvent} />
           <Route path='/editev/:id' component={EditEvent} />

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './Catalog.css';
 import {withRouter} from 'react-router';
+import Search from './../common/Search';
+import './Catalog.css';
 
 class Catalog extends Component {
   constructor(props){
@@ -46,7 +47,7 @@ class Catalog extends Component {
                 isAdded: false,
                 selectedBook: {} 
             });
-        }, 3500);
+        }, 1500);
     });
   }
 
@@ -55,20 +56,15 @@ class Catalog extends Component {
           <div class="container">
             <div class="panel">
               <div className="row">
-                {/* https://drive.google.com/file/d/1GXHsmI8OnoI1NzBmPydOD5ffiCBnW8HD/view?usp=sharing" 
-                    https://drive.google.com/thumbnail?id=1GXHsmI8OnoI1NzBmPydOD5ffiCBnW8HD*/}
                 <div className="col-md-4">
                   <h2 class="page-title">Book Catalog</h2>
                 </div>
-                <div className="col-md-4">
-                    
-                </div>
-                <div className="col-md-4">
+                <div className="col-md-4 offset-md-4">
+                <Search />
                 </div>
               </div>
               <div class="album py-5">
-                <div class="container">
-                  <div class="row">
+                <div class="row">
                   {this.state.books.map(book =>
                     <div class="col-md-3" key={book._id}>
                       <div class="card mb-3 bg-light">
@@ -86,14 +82,16 @@ class Catalog extends Component {
                                 currency: 'USD' 
                             }).format(book.price)}
                             </p>
-                                <Link to={`/book/${book._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
-                                <button type="button" className={!this.state.isAdded ? "btn btn-sm btn-secondary" : "btn btn-sm btn-secondary added"} onClick={this.addToCart.bind(this, book.imageURL, book.title, book.price, book._id)}>{!this.state.isAdded ? "Add to Cart" : "✔ Added"}</button>
+                            <Link to={`/book/${book._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
+                            <button type="button" className="btn btn-sm btn-secondary" 
+                            onClick={this.addToCart.bind(this, book.imageURL, book.title, book.price, book._id)}>
+                            Add to Cart
+                            </button>
                           </div>
                       </div>
                     </div>
                     )}
                   </div>
-                </div>
               </div>
             </div>
           </div>

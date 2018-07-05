@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-const EmptyCart = (props) =>{
+const EmptyCart = (props) => {
     return(
         <div className="empty-cart">
             <img src={require('./empty-cart.png')} alt="empty-cart"/>

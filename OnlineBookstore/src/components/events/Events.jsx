@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import Search from './../common/Search';
 import './Events.css';
 
 class Events extends Component {
@@ -28,7 +29,15 @@ class Events extends Component {
         moment.locale('en');
         return(
             <div className="container">
-                <h2 className="event-title">Events</h2>
+                <div className="row">
+                    <div className="col-md-4">
+                    <h2 className="event-title">Events</h2>
+                    </div>
+                    <div className="col-md-4 offset-md-4">
+                    <Search events={this.state.events} />
+                    </div>
+                </div>
+                <div className="py-5">
                 {this.state.events.map(event=> 
                     <div className="row mt-3 pt-2 pb-2 bg-light" key={event._id}>
                         <div className="col-md-2">
@@ -43,10 +52,10 @@ class Events extends Component {
                             <p>{moment(event.eventDate).format('LL')} | {event.hours}</p>
                             <p><Link to={`/evcategory/${event.category}`} className="category">{event.category}</Link></p>
                             <Link to={`/event/${event._id}`} type="button" className="btn btn-sm btn-secondary mr-2">View More</Link>
-                                </div>
-                            </div>                    
+                        </div>
+                    </div>                    
                 )}
-            
+                </div>
             </div>
         );
     }

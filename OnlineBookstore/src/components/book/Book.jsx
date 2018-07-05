@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import './Book.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router';
 import AddComment from './../add_comment/AddComment';
 import Comment from './../comment/Comment';
+import './Book.css';
 
 class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
       book: {},
+      selectedBook: {},
       add: '',
+      isAdded: false
     };
   }
 
@@ -76,6 +79,30 @@ class Book extends Component {
     }
   }
 
+  addToCart(image, title, price, id) {
+    this.setState({
+      selectedBook: {
+        image: image,
+        title: title,
+        price: price,
+        id: id,
+      }
+    }, function(){
+        this.props.addToCart(this.state.selectedBook);
+    })
+    
+    this.setState({
+        isAdded: true
+    }, function(){
+        setTimeout(() => {
+            this.setState({
+                isAdded: false,
+                selectedBook: {} 
+            });
+        }, 1500);
+    });
+  }
+
   render() {
     const rArray = this.state.book.reviews || [];
     const label = this.state.add ?  'Add to' : 'Remove from';
@@ -96,7 +123,7 @@ class Book extends Component {
                                 style: 'currency', 
                                 currency: 'USD' 
                             }).format(this.state.book.price)}
-                      <button type="button" class="btn btn-sm btn-secondary ml-3">Add to Card</button>
+                      <button type="button" className={!this.state.isAdded ? "btn btn-sm btn-secondary ml-3" : "btn btn-sm btn-secondary ml-3 added"} onClick={this.addToCart.bind(this, this.state.book.imageURL, this.state.book.title, this.state.book.price, this.state.book._id)}>{!this.state.isAdded ? "Add to Cart" : "✔ Added"}</button>
                     </p>
                     <div>
                       <h5><u>Description</u></h5>
@@ -115,7 +142,7 @@ class Book extends Component {
               <div class="mt-3">
                 <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
                 <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
-                <button type="button" class="btn btn-sm btn-secondary mr-1">Add to Card</button>
+                <button type="button" className={!this.state.isAdded ? "btn btn-sm btn-secondary mr-1" : "btn btn-sm btn-secondary mr-1 added"} onClick={this.addToCart.bind(this, this.state.book.imageURL, this.state.book.title, this.state.book.price, this.state.book._id)}>{!this.state.isAdded ? "Add to Cart" : "✔ Added"}</button>
                 <button onClick={this.bookAction.bind(this, this.state.book._id, this.state.book.title)} type="button" className="btn btn-sm btn-secondary">{label} Book List</button>
                   </div>
             </div>
@@ -126,7 +153,7 @@ class Book extends Component {
               </div>
             </div>
             <div class="reviews-content bg-light p-3 mb-3 border">
-              <h5><u>Reviews</u></h5>
+              <h5 className="mb-3"><u>Reviews</u></h5>
               {rArray.length === 0 && <div>This book has no reviews yet.</div> }
               {rArray.length > 0 && rArray.map((review) => {
                  return <Comment key={review._id} props={review}/>;
@@ -138,4 +165,4 @@ class Book extends Component {
   }
 }
 
-export default Book;
+export default withRouter(Book);

@@ -64,7 +64,6 @@ export default class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                <Link to="/list" type="button" className="btn btn-sm btn-secondary mt-3">All Users</Link>
             </div>
         );
     }
