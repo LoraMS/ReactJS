@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Input from './../common/Input';
-import './Create.css';
+import Input from './../../common/Input';
+import './CreateBook.css';
 
-class Create extends Component {
+class CreateBook extends Component {
 
   constructor(props) {
     super(props);
@@ -162,4 +162,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default CreateBook;

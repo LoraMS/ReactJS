@@ -3,20 +3,20 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/home/HomePage';
-import Catalog from './components/catalog/Catalog';
-import Edit from './components/edit/Edit';
-import Create from './components/create/Create';
-import Book from './components/book/Book';
+import Catalog from './components/books/catalog/Catalog';
+import EditBook from './components/books/edit/EditBook';
+import CreateBook from './components/books/create/CreateBook';
+import Book from './components/books/book/Book';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import About from './components/about/About';
 import Profile from './components/user/Profile';
-import CreateEvent from './components/create_event/CreateEvent';
-import Events from './components/events/Events';
-import Event from './components/event/Event';
-import EditEvent from './components/edit_event/EditEvent';
+import CreateEvent from './components/events/create/CreateEvent';
+import Events from './components/events/events/Events';
+import Event from './components/events/event/Event';
+import EditEvent from './components/events/edit/EditEvent';
 import CategoryBook from './components/category/CategoryBook';
 import CategoryEvent from './components/category/CategoryEvent';
 import UserList from './components/user/UserList';
@@ -148,8 +148,8 @@ class App extends Component {
           <Route path='/category/:name' component={CategoryBook} />
           <Route path='/evcategory/:name' component={CategoryEvent} />
           <Route path='/catalog' render={()=><Catalog addToCart={this.handleAddToCart}/>} />
-          <Route path='/edit/:id' component={Edit} />
-          <Route path='/create' component={Create} />
+          <Route path='/edit/:id' component={EditBook} />
+          <Route path='/create' component={CreateBook} />
           <Route path='/book/:id' render={()=><Book addToCart={this.handleAddToCart}/>} />
           <Route path='/events' component={Events} />
           <Route path='/add' component={CreateEvent} />

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './../catalog/Catalog.css';
+import BooksComponent from './../books/catalog/BooksComponent';
+import './../books/catalog/Catalog.css';
 
 export default class CategoryBook extends Component {
     constructor(props){
         super(props);
         this.state= {
-            books: []
+            books: [],
+            buttonCart: false
         };
     }
 
@@ -36,7 +37,8 @@ export default class CategoryBook extends Component {
               <div class="album py-5">
                 <div class="container">
                   <div class="row">
-                  {this.state.books.map(book =>
+                  <BooksComponent books={this.state.books} buttonCart={this.state.buttonCart}/>
+                  {/* {this.state.books.map(book =>
                     <div class="col-md-3" key={book._id}>
                       <div class="card mb-3 bg-light">
                         <Link to={`/book/${book._id}`}>
@@ -58,7 +60,7 @@ export default class CategoryBook extends Component {
                         </div>
                       </div>
                     </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </div>

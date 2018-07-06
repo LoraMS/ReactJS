@@ -6,7 +6,7 @@ class NonEmptyCart extends Component{
             <div>
                 {this.props.cart.map(book =>
                     <div className="cart-item" key={book.id}>
-                        <img className="book-image" src={book.image} />
+                        <img className="book-image" src={book.image} alt="book"/>
                         <div className="book-info">
                             <p className="book-title">{book.title}</p>
                         </div>

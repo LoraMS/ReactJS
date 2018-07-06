@@ -5,7 +5,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
-// const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 const book = require('./routes/book');
 const event = require('./routes/event');
@@ -52,6 +52,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// app.listen(port, () => console.log(`Server listening on port ${port}`));
+app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 module.exports = app;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {withRouter} from 'react-router';
-import Search from './../common/Search';
+import BooksComponent from './BooksComponent';
+import Search from './../../common/Search';
+import PageNotFound from './../../common/PageNotFound';
 import './Catalog.css';
 
 class Catalog extends Component {
@@ -11,7 +12,9 @@ class Catalog extends Component {
       this.state= {
         books: [],
         selectedBook: {},
-        isAdded: false
+        isAdded: false,
+        buttonCart: true,
+        query: '',
         };
     }
 
@@ -51,8 +54,23 @@ class Catalog extends Component {
     });
   }
 
-      render() {
-        return (
+  handleSearch(e){
+		this.setState({query: e.target.value});
+  }
+  
+  render() {
+    let filteredItems = this.state.books.filter(e => e.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
+    console.log(filteredItems.length)
+    let view;
+    if (filteredItems.length > 0){
+      view =  <BooksComponent books={filteredItems} addToCart={this.addToCart.bind(this)} buttonCart={this.state.buttonCart}/>
+    } else if(filteredItems.length === 0){
+      view =  <PageNotFound />
+    } else {
+      view = <BooksComponent books={this.state.books} addToCart={this.addToCart.bind(this)} buttonCart={this.state.buttonCart}/>
+    }
+
+    return (
           <div class="container">
             <div class="panel">
               <div className="row">
@@ -60,12 +78,14 @@ class Catalog extends Component {
                   <h2 class="page-title">Book Catalog</h2>
                 </div>
                 <div className="col-md-4 offset-md-4">
-                <Search />
+                <Search search={this.handleSearch.bind(this)}/>
                 </div>
               </div>
               <div class="album py-5">
                 <div class="row">
-                  {this.state.books.map(book =>
+                  {view}
+                  
+                  {/* {this.state.books.map(book =>
                     <div class="col-md-3" key={book._id}>
                       <div class="card mb-3 bg-light">
                         <Link to={`/book/${book._id}`}>
@@ -90,7 +110,7 @@ class Catalog extends Component {
                           </div>
                       </div>
                     </div>
-                    )}
+                    )} */}
                   </div>
               </div>
             </div>

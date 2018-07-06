@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Login.css';
 import Input from './../common/Input.jsx';
+import './Login.css';
 
 class Register extends Component {
   constructor(props) {

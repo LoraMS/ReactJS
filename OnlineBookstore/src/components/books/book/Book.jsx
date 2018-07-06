@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {withRouter} from 'react-router';
-import AddComment from './../add_comment/AddComment';
-import Comment from './../comment/Comment';
+import AddComment from './../../comments/add_comment/AddComment';
+import Comment from './../../comments/comment/Comment';
 import './Book.css';
 
 class Book extends Component {

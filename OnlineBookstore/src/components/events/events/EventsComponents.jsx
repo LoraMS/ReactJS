@@ -1,35 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import moment from 'moment';
-import './../events/events/Events.css';
 
-export default class CategoryEvent extends Component {
-    constructor(props){
-        super(props);
-        this.state= {
-            events: []
-        }; 
-    }
-
-    componentDidMount() {
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
-        axios.get('/api/event/evcategory/' + this.props.match.params.name)
-          .then(res => {
-            this.setState({ events: res.data });
-          })
-          .catch((error) => {
-            if(error.response.status === 401) {
-              this.props.history.push("/events");
-            }
-          });
-      }
-
+export default class EventsComponent extends Component {
     render(){
         moment.locale('en');
         return(
-            <div className="container">
-                <h2 class="event-title">Events in Category {this.props.match.params.name}</h2>
                 {this.state.events.map((event)=> {
                     if(moment(event.eventDate).isSameOrAfter()){
                         return (                               
@@ -72,8 +48,6 @@ export default class CategoryEvent extends Component {
                     }
                     }
                 )}
-            
-            </div>
         );
     }
 }

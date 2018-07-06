@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import Search from './../common/Search';
+import Search from './../../common/Search';
 import './Events.css';
 
 class Events extends Component {
     constructor(props){
         super(props);
         this.state= {
-            events: []
+            events: [],
+            query: '',
         }; 
     }
 
@@ -23,10 +24,15 @@ class Events extends Component {
               this.props.history.push("/events");
             }
           });
-      }
+    }
+
+    handleSearch(event){
+		this.setState({query: event.target.value});
+	}
 
     render(){
         moment.locale('en');
+        let filteredItems = this.state.events.filter(e => e.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
         return(
             <div className="container">
                 <div className="row">
@@ -34,7 +40,7 @@ class Events extends Component {
                     <h2 className="event-title">Events</h2>
                     </div>
                     <div className="col-md-4 offset-md-4">
-                    <Search events={this.state.events} />
+                    <Search search={this.handleSearch.bind(this)} />
                     </div>
                 </div>
                 <div className="py-5">

@@ -21,9 +21,12 @@ td{
     line-height: 16px;
 }
 .cart-icon{
-    margin-left: 16px;
+    margin-left: 10px;
+    margin-top: -15px;
     z-index: 99;
-    position: relative
+    position: relative;
+    background-color: transparent;
+    border: none;
 }
 
 .cart-preview{

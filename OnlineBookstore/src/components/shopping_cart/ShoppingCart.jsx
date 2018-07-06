@@ -43,21 +43,31 @@ export default class ShoppingCart extends Component{
                                     <tr>
                                         <td>Total</td>
                                         <td>:</td>
-                                        <td><strong>{this.props.total}$</strong></td>
+                                        <td><strong>
+                                            {new Intl.NumberFormat('de-DE', { 
+                                                style: 'currency', 
+                                                currency: 'USD' 
+                                                }).format(this.props.total)}
+                                        </strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <a className="cart-icon" href="#" onClick={this.handleCart.bind(this)} ref="cartButton">
+                        <button className="cart-icon" onClick={this.handleCart.bind(this)}>
                             <img src="https://drive.google.com/thumbnail?id=1IfEA5dFnBrWdngo7Hy6jslTHIftYg7IR" alt="Cart"/>
-                        </a>
-                        <div className={this.state.showCart ? "cart-preview active" : "cart-preview"} ref="cartPreview">
+                        </button>
+                        <div className={this.state.showCart ? "cart-preview active" : "cart-preview"}>
                             {view}
                             <div className="action-block">
                                 {this.props.cart.length > 0  && <div className="row mb-3">
                                     <div className="col-md-4"><strong>Total</strong></div>
                                     <div className="col-md-4"><strong>{this.props.totalItems}</strong></div>
-                                    <div className="col-md-4"><strong>{this.props.total} $</strong></div>
+                                    <div className="col-md-4"><strong>
+                                    {new Intl.NumberFormat('de-DE', { 
+                                            style: 'currency', 
+                                            currency: 'USD' 
+                                            }).format(this.props.total)}
+                                    </strong></div>
                                 </div>}
                                 <button type="button" className={this.props.cart.length > 0 ? "btn btn-lg btn-secondary" : "btn btn-lg btn-secondary disabled"} onClick={this.props.checkout}>Checkout</button>
                             </div>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Input from './../common/Input';
-import './Edit.css';
+import Input from './../../common/Input';
+import './EditBook.css';
 
-class Edit extends Component {
+class EditBook extends Component {
 
   constructor(props) {
     super(props);
@@ -150,4 +150,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default EditBook;

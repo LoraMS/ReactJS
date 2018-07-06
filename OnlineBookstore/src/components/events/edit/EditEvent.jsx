@@ -1,92 +1,91 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Input from './../common/Input';
+import { Link } from 'react-router-dom';
+import Input from './../../common/Input';
 
-class CreateEvent extends Component {
-  constructor() {
-    super();
+
+class EditEvent extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      title: '',
-      description: '',
-      eventDate: null,
-      hours: '',
-      imageURL: '',
-      category: '',
-      reviews: null,
+      event: {},
       message: '',
     };
   }
 
   componentDidMount() {
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+    axios.get('/api/event/'+this.props.match.params.id)
+      .then(res => {
+        this.setState({ event: res.data });
+      });
   }
 
   onChange = (e) => {
-    const state = this.state
+    const state = this.state.event
     state[e.target.name] = e.target.value;
-    this.setState(state);
+    this.setState({event:state});
   }
 
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, description, eventDate, hours, imageURL, category } = this.state;
+    const { title, description, eventDate, hours, imageURL, category } = this.state.event;
 
-    axios.post('/api/event', { title, description, eventDate, hours, imageURL, category })
+    axios.put('/api/event/'+this.props.match.params.id, { title, description, eventDate, hours, imageURL, category })
       .then((result) => {
-        this.props.history.push("/events")
+        this.props.history.push("/event/"+this.props.match.params.id)
       })
       .catch((error) => {
         if(error.response.status === 401) {
-          this.setState({ message: 'Create failed. Check the form for errors' });
+          this.setState({ message: 'Edit failed. Check the form for errors' });
         }
       });
   }
 
   render() {
-    const { title, description, eventDate, hours, imageURL, category, message } = this.state;
     return (
       <div class="container">
         <div class="panel">
-        <h2 class="create-title">
-              Add Event
+            <h2 class="edit-title">
+              Edit Event
             </h2>
             <form onSubmit={this.onSubmit}>
-            {message !== '' &&
+            {this.state.message !== '' &&
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              <strong>Error</strong> {message}
+              <strong>Error</strong> {this.state.message}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
           }
               <div class="form-group">
-                <Input
+              <Input
                   name="title"
                   type="text"
-                  value={title}
+                  value={this.state.event.title}
                   placeholder=" Title"
                   onChange={this.onChange}
                   label="Title" />
               </div>
               <div class="form-group">
                 <label htmlFor="description" className="sr-only">Description:</label>
-                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.event.description}</textArea>
               </div>
               <div class="form-group">
-                <Input
+              <Input
                   name="eventDate"
-                  type="date"
-                  value={eventDate}
+                  type="text"
+                  value={this.state.event.eventDate}
                   placeholder=" Event Date"
                   onChange={this.onChange}
                   label="Event Date" />
               </div>
               <div class="form-group">
-                <Input
+              <Input
                   name="hours"
                   type="text"
-                  value={hours}
+                  value={this.state.event.hours}
                   placeholder=" Hours"
                   onChange={this.onChange}
                   label="Hours" />
@@ -95,7 +94,7 @@ class CreateEvent extends Component {
                 <Input
                   name="category"
                   type="text"
-                  value={category}
+                  value={this.state.event.category}
                   placeholder=" Category"
                   onChange={this.onChange}
                   label="Category" />
@@ -104,12 +103,14 @@ class CreateEvent extends Component {
                   <Input
                   name="imageURL"
                   type="text"
-                  value={imageURL}
+                  value={this.state.event.imageURL}
                   placeholder=" Image URL"
                   onChange={this.onChange}
                   label="Image" />
+                <img src={this.state.event.imageURL} alt="img" />
               </div>
-              <button type="submit" class="btn btn-secondary">Add Event</button>
+              <Link to={`/event/${this.state.event._id}`} class="btn btn-secondary mr-3">Back to Event</Link>
+              <button type="submit" class="btn btn-secondary">Edit Event</button>
             </form>
         </div>
       </div>
@@ -117,4 +118,4 @@ class CreateEvent extends Component {
   }
 }
 
-export default CreateEvent;
+export default EditEvent;
