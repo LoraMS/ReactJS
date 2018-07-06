@@ -60,7 +60,6 @@ class Catalog extends Component {
   
   render() {
     let filteredItems = this.state.books.filter(e => e.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
-    console.log(filteredItems.length)
     let view;
     if (filteredItems.length > 0){
       view =  <BooksComponent books={filteredItems} addToCart={this.addToCart.bind(this)} buttonCart={this.state.buttonCart}/>
@@ -71,50 +70,23 @@ class Catalog extends Component {
     }
 
     return (
-          <div class="container">
-            <div class="panel">
-              <div className="row">
-                <div className="col-md-4">
-                  <h2 class="page-title">Book Catalog</h2>
-                </div>
-                <div className="col-md-4 offset-md-4">
-                <Search search={this.handleSearch.bind(this)}/>
-                </div>
-              </div>
-              <div class="album py-5">
-                <div class="row">
-                  {view}
-                  
-                  {/* {this.state.books.map(book =>
-                    <div class="col-md-3" key={book._id}>
-                      <div class="card mb-3 bg-light">
-                        <Link to={`/book/${book._id}`}>
-                          <img class="card-img-top" src={book.imageURL} alt="book" data-holder-rendered="true"/>
-                        </Link>
-                          <div class="card-body">
-                            <Link to={`/book/${book._id}`}>
-                              <h5 class="card-title text-muted"><u>{book.title}</u></h5>
-                            </Link>
-                            <p class="card-text">{book.shortDescription}</p>
-                            <p className="price">
-                            {new Intl.NumberFormat('de-DE', { 
-                                style: 'currency', 
-                                currency: 'USD' 
-                            }).format(book.price)}
-                            </p>
-                            <Link to={`/book/${book._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
-                            <button type="button" className="btn btn-sm btn-secondary" 
-                            onClick={this.addToCart.bind(this, book.imageURL, book.title, book.price, book._id)}>
-                            Add to Cart
-                            </button>
-                          </div>
-                      </div>
-                    </div>
-                    )} */}
-                  </div>
-              </div>
+      <div class="container">
+        <div class="panel">
+          <div className="row">
+            <div className="col-md-4">
+              <h2 class="page-title">Book Catalog</h2>
+            </div>
+            <div className="col-md-4 offset-md-4">
+              <Search search={this.handleSearch.bind(this)}/>
             </div>
           </div>
+          <div class="album py-5">
+            <div class="row">
+              {view}
+            </div>
+          </div>
+        </div>
+      </div>
         );
       }
 }

@@ -14,3 +14,27 @@ export default class PrivateRoute extends Component{
         );
     }
 } 
+
+// //Private router function
+// const PrivateRoute = ({ component: Component, ...rest }) => {
+//     return (
+//       <Route
+//         {...rest}
+//         render={props =>
+//           fakeAuth.isAuthenticated === true ? (
+//             <Component {...props} />
+//           ) : (
+//             <Redirect
+//               to={{ pathname: "/login", state: { from: props.location } }}
+//             />
+//           )}
+//       />
+//     );
+//   };
+
+{/* <Switch>
+  <Route exact path="/" component={Home} data={data}/>
+  <Route path="/category" component={Category}/>
+  <Route path="/login" component={Login}/>
+  <PrivateRoute authed={fakeAuth.isAuthenticated} path='/products' component = {Products} />
+</Switch> */}

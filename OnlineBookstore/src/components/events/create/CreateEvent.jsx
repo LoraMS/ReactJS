@@ -58,8 +58,7 @@ class CreateEvent extends Component {
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
-          }
+            </div>}
               <div class="form-group">
                 <Input
                   name="title"
@@ -108,6 +107,7 @@ class CreateEvent extends Component {
                   placeholder=" Image URL"
                   onChange={this.onChange}
                   label="Image" />
+                  <img src={this.state.imageURL} alt="img" />
               </div>
               <button type="submit" class="btn btn-secondary">Add Event</button>
             </form>
