@@ -1,40 +1,25 @@
 import React, { Component } from 'react';
-import { Redirect, Route } from 'react-router-dom';
 
-export default class PrivateRoute extends Component{
-    render(){
-        if(localStorage.getItem('role') === 'read'){
-            return <Redirect to="/login" />;
-        }
+const PrivateRoute = ComposedComponent => {
+    return class Authentication extends Component {
+		componentDidMount() {
+            console.log(this.props);
+			if(this.props.role !== 'admin') {
+				this.props.history.push('/login');			
+			}
+		}
 
-        return(
-            <Route {...this.props}>
-                {this.props.children}
-            </Route>
-        );
-    }
+		render() {
+			return(
+				<div>
+					<ComposedComponent {...this.props} />
+				</div>
+			)
+		}
+	}
 } 
 
-// //Private router function
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-//     return (
-//       <Route
-//         {...rest}
-//         render={props =>
-//           fakeAuth.isAuthenticated === true ? (
-//             <Component {...props} />
-//           ) : (
-//             <Redirect
-//               to={{ pathname: "/login", state: { from: props.location } }}
-//             />
-//           )}
-//       />
-//     );
-//   };
+export default PrivateRoute;
 
-{/* <Switch>
-  <Route exact path="/" component={Home} data={data}/>
-  <Route path="/category" component={Category}/>
-  <Route path="/login" component={Login}/>
-  <PrivateRoute authed={fakeAuth.isAuthenticated} path='/products' component = {Products} />
-</Switch> */}
+
+

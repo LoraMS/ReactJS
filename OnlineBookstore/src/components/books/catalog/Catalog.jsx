@@ -4,6 +4,7 @@ import {withRouter} from 'react-router';
 import BooksComponent from './BooksComponent';
 import Search from './../../common/Search';
 import PageNotFound from './../../common/PageNotFound';
+import LoadIndicator from './../../common/LoadIndicator';
 import './Catalog.css';
 
 class Catalog extends Component {
@@ -59,14 +60,15 @@ class Catalog extends Component {
   }
   
   render() {
-    let filteredItems = this.state.books.filter(e => e.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
     let view;
-    if (filteredItems.length > 0){
-      view =  <BooksComponent books={filteredItems} addToCart={this.addToCart.bind(this)} buttonCart={this.state.buttonCart}/>
-    } else if(filteredItems.length === 0){
-      view =  <PageNotFound />
+    let filteredItems = this.state.books.filter(e => e.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
+
+    const BooksWithLoadIndicator = LoadIndicator('books')(BooksComponent);
+    
+    if(filteredItems.length <= 0 && this.state.query){
+      view = <PageNotFound />
     } else {
-      view = <BooksComponent books={this.state.books} addToCart={this.addToCart.bind(this)} buttonCart={this.state.buttonCart}/>
+      view = <BooksWithLoadIndicator books={filteredItems} addToCart={this.addToCart.bind(this)} buttonCart={this.state.buttonCart}/>
     }
 
     return (

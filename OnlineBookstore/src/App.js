@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import {withRouter} from 'react-router';
 import Home from './components/home/HomePage';
 import Catalog from './components/books/catalog/Catalog';
 import EditBook from './components/books/edit/EditBook';
@@ -21,6 +21,8 @@ import CategoryBook from './components/category/CategoryBook';
 import CategoryEvent from './components/category/CategoryEvent';
 import UserList from './components/user/UserList';
 import PageNotFound from './components/common/PageNotFound';
+import PrivateRoute from './components/common/PrivateRoute';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +32,8 @@ class App extends Component {
 			books: [],
 			cart: [],
 			totalItems: 0,
-			totalAmount: 0, 
+      totalAmount: 0, 
+      role: localStorage.getItem('role'),
     };
     
 		this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -130,6 +133,13 @@ class App extends Component {
   } 
 
   render() {
+    console.log(this.props);
+    const AuthCreateBook = withRouter(PrivateRoute(CreateBook));
+    // const AuthEditBook = withRouter(PrivateRoute(EditBook));
+    const AuthCreateEvent = withRouter(PrivateRoute(CreateEvent));
+    // const AuthEditEvent = withRouter(PrivateRoute(EditEvent));
+    const AuthListUsers = withRouter(PrivateRoute(UserList));
+
     return (
       <div className="App">
         <Header 
@@ -149,15 +159,15 @@ class App extends Component {
           <Route path='/evcategory/:name' component={CategoryEvent} />
           <Route path='/catalog' render={()=><Catalog addToCart={this.handleAddToCart}/>} />
           <Route path='/edit/:id' component={EditBook} />
-          <Route path='/create' component={CreateBook} />
-          <Route path='/book/:id' render={()=><Book addToCart={this.handleAddToCart}/>} />
+          <Route path='/create' render = {()=><AuthCreateBook role = {this.state.role} {...this.props} /> } />
+          <Route path='/book/:id' render={()=><Book addToCart = {this.handleAddToCart}/>} />
           <Route path='/events' component={Events} />
-          <Route path='/add' component={CreateEvent} />
+          <Route path='/add' render = {()=><AuthCreateEvent role = {this.state.role} {...this.props} /> } />
           <Route path='/editev/:id' component={EditEvent} />
           <Route path='/event/:id' component={Event} />
           <Route path='/about' component={About} />
           <Route path='/profile' component={Profile} />
-          <Route path='/list' component={UserList} />
+          <Route path='/list' render = {()=><AuthListUsers role = {this.state.role} {...this.props} /> } />
           <Route path="*" component={PageNotFound}/>
         </Switch>
         <Footer />

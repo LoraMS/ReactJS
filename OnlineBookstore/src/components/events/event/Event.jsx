@@ -78,6 +78,8 @@ class Event extends Component {
     render() {
         moment.locale('en');
         const label = this.state.participate ?  'Participate' : 'Leave';
+        const role = localStorage.getItem('role');
+
         return(
             <div className="container">
             <h3 className="event-title">{this.state.event.title}</h3>
@@ -96,8 +98,8 @@ class Event extends Component {
             <p><strong>Date: </strong>{moment(this.state.event.eventDate).format('LL')}</p>
             <p><strong>Time: </strong>{this.state.event.hours}</p>
             <p><strong>Event Category: </strong><Link to={`/evcategory/${this.state.event.category}`} className="category">{this.state.event.category}</Link></p>
-            <Link to={`/editev/${this.state.event._id}`} className="btn btn-sm btn-secondary mr-1">Edit</Link>
-            <button onClick={this.delete.bind(this, this.state.event._id)} className="btn btn-sm btn-secondary mr-1">Delete</button>
+            {role === 'admin' && <Link to={`/editev/${this.state.event._id}`} className="btn btn-sm btn-secondary mr-1">Edit</Link>}
+            {role === 'admin' && <button onClick={this.delete.bind(this, this.state.event._id)} className="btn btn-sm btn-secondary mr-1">Delete</button>}
             {moment(this.state.event.eventDate).isSameOrAfter() > 0 && <button onClick={this.eventAction.bind(this, this.state.event._id, this.state.event.title)} type="button" className="btn btn-sm btn-secondary mr-1">{label}</button>}
             </div>
             </div>

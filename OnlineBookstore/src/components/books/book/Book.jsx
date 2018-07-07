@@ -106,6 +106,8 @@ class Book extends Component {
   render() {
     const rArray = this.state.book.reviews || [];
     const label = this.state.add ?  'Add to' : 'Remove from';
+    const role = localStorage.getItem('role');
+
     return (
       <div class="container">
         <div class="panel">
@@ -140,8 +142,8 @@ class Book extends Component {
               <p><strong>Year of publishing: </strong>{this.state.book.publishedYear}</p>
               <p><strong>Product ID: </strong>{this.state.book.isbn}</p>
               <div class="mt-3">
-                <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>
-                <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>
+                {role === 'admin' && <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>}
+                {role === 'admin' && <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>}
                 <button type="button" className={!this.state.isAdded ? "btn btn-sm btn-secondary mr-1" : "btn btn-sm btn-secondary mr-1 added"} onClick={this.addToCart.bind(this, this.state.book.imageURL, this.state.book.title, this.state.book.price, this.state.book._id)}>{!this.state.isAdded ? "Add to Cart" : "✔ Added"}</button>
                 <button onClick={this.bookAction.bind(this, this.state.book._id, this.state.book.title)} type="button" className="btn btn-sm btn-secondary">{label} Book List</button>
                   </div>

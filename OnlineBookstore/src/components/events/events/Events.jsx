@@ -4,6 +4,7 @@ import moment from 'moment';
 import EventsComponent from './EventsComponents';
 import Search from './../../common/Search';
 import PageNotFound from './../../common/PageNotFound';
+import LoadIndicator from './../../common/LoadIndicator';
 import './Events.css';
 
 class Events extends Component {
@@ -77,17 +78,16 @@ class Events extends Component {
 
     render(){
         moment.locale('en');
-        let view;
+        const EventsWithLoadIndicator = LoadIndicator('events')(EventsComponent);
         const label = this.state.participate ?  'Participate' : 'Leave';
+        let view;
 
         let filteredItems = this.state.events.filter(e => e.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1);
         
-        if (filteredItems.length > 0){
-        view = <EventsComponent events={filteredItems} eventAction={this.eventAction.bind(this)} buttonPart={this.state.buttonPart} label={label}/>
-        } else if(filteredItems.length === 0){
-        view =  <PageNotFound />
+        if(filteredItems.length <= 0 && this.state.query){
+        view = <PageNotFound />
         } else {
-        view = <EventsComponent events={this.state.events} eventAction={this.eventAction.bind(this)} buttonPart={this.state.buttonPart} label={label}/>
+        view = <EventsWithLoadIndicator events={filteredItems} eventAction={this.eventAction.bind(this)} buttonPart={this.state.buttonPart} label={label}/>
         }
 
         return(
