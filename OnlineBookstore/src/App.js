@@ -32,8 +32,7 @@ class App extends Component {
 			books: [],
 			cart: [],
 			totalItems: 0,
-      totalAmount: 0, 
-      role: localStorage.getItem('role'),
+      totalAmount: 0,
     };
     
 		this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -133,12 +132,13 @@ class App extends Component {
   } 
 
   render() {
-    console.log(this.props);
     const AuthCreateBook = withRouter(PrivateRoute(CreateBook));
     // const AuthEditBook = withRouter(PrivateRoute(EditBook));
     const AuthCreateEvent = withRouter(PrivateRoute(CreateEvent));
     // const AuthEditEvent = withRouter(PrivateRoute(EditEvent));
     const AuthListUsers = withRouter(PrivateRoute(UserList));
+
+    const role = localStorage.getItem('role');
 
     return (
       <div className="App">
@@ -159,15 +159,15 @@ class App extends Component {
           <Route path='/evcategory/:name' component={CategoryEvent} />
           <Route path='/catalog' render={()=><Catalog addToCart={this.handleAddToCart}/>} />
           <Route path='/edit/:id' component={EditBook} />
-          <Route path='/create' render = {()=><AuthCreateBook role = {this.state.role} {...this.props} /> } />
+          <Route path='/create' render = {()=><AuthCreateBook role = {role} {...this.props} /> } />
           <Route path='/book/:id' render={()=><Book addToCart = {this.handleAddToCart}/>} />
           <Route path='/events' component={Events} />
-          <Route path='/add' render = {()=><AuthCreateEvent role = {this.state.role} {...this.props} /> } />
+          <Route path='/add' render = {()=><AuthCreateEvent role = {role} {...this.props} /> } />
           <Route path='/editev/:id' component={EditEvent} />
           <Route path='/event/:id' component={Event} />
           <Route path='/about' component={About} />
           <Route path='/profile' component={Profile} />
-          <Route path='/list' render = {()=><AuthListUsers role = {this.state.role} {...this.props} /> } />
+          <Route path='/list' render = {()=><AuthListUsers role = {role} {...this.props} /> } />
           <Route path="*" component={PageNotFound}/>
         </Switch>
         <Footer />

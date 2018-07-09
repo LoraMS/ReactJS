@@ -6,6 +6,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../models/user");
+var Event = require("./../models/Event.js");
 
 router.post('/register', function(req, res) {
     if (!req.body.username || !req.body.password) {
@@ -92,19 +93,33 @@ router.delete('/all/:id', passport.authenticate('jwt', { session: false}), funct
   }
 });
 
-router.put('/participate', passport.authenticate('jwt', { session: false}), function(req, res, next) {
+router.put('/participate', passport.authenticate('jwt', { session: false}), function(req, res) {
   var token = getToken(req.headers);
   if (token) {
-    User.findOne({username: req.body.name}, function (err, user) {
-      if (err) { return next(err); }
+    Promise.all([
+      User.findOne({username: req.body.name}).exec(),
+      Event.findById(req.body.eventId).exec()
+    ])
+    .then(function(results) {
+      // results is [devDocs, jobs]
+      var user = results[0];
+      var event = results[1];
       var eventId = req.body.eventId;
       var title = req.body.title;
       user.eventList.push({eventId, title});
-      user.save(function (err, updated) {
-        if (err) { return next(err); }
-        res.send(updated);
-      });
-    });
+
+      var uName = req.body.name;
+      event.users.push(uName);
+
+      return Promise.all([user, event])
+        .then(function(results){
+          console.log(results)
+          results.map(item => item.save())
+          res.send(results);
+        });
+    }).catch(function(err) {
+      res.send(err);
+  });
   } else {
     return res.status(403).send({success: false, msg: 'Unauthorized.'});
   }
@@ -113,18 +128,34 @@ router.put('/participate', passport.authenticate('jwt', { session: false}), func
 router.put('/leave', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
-    User.findOne({username: req.body.name}, function (err, user) {
-      if (err) { return next(err); }
+    Promise.all([
+      User.findOne({username: req.body.name}).exec(),
+      Event.findById(req.body.eventId).exec()
+    ])
+    .then(function(results) {
+      // results is [devDocs, jobs]
+      var user = results[0];
+      var event = results[1];
       var eventId = req.body.eventId;
       var eIndex = user.eventList.findIndex(e => e.eventId == eventId);
       if(eIndex !== -1){
         user.eventList.splice(eIndex, 1);
       }
-      user.save(function (err, updated) {
-        if (err) { return next(err); }
-        res.send(updated);
-      });
-    });
+
+      var uName = req.body.name;
+      var uIndex = event.users.findIndex(u => u === uName);
+      if(uIndex !== -1){
+        event.users.splice(uIndex, 1);
+      }
+
+      return Promise.all([user, event])
+        .then(function(results){
+          results.map(item => item.save())
+          res.send(results);
+        });
+    }).catch(function(err) {
+      res.send(err);
+  });    
   } else {
     return res.status(403).send({success: false, msg: 'Unauthorized.'});
   }
@@ -169,3 +200,64 @@ router.put('/remove', passport.authenticate('jwt', { session: false}), function(
 });
 
 module.exports = router;
+
+
+
+/*
+router.put('/participate', passport.authenticate('jwt', { session: false}), function(req, res, next) {
+  var token = getToken(req.headers);
+  if (token) {
+    User.findOne({username: req.body.name}, function (err, user) {
+      var eventId = req.body.eventId;
+      var title = req.body.title;
+      user.eventList.push({eventId, title});
+      user.save(function (err, updated) {
+        // if (err) { return next(err); }
+        res.send(updated);
+      });
+    });
+    
+    Event.findById(req.body.eventId, function (err, event) {
+      var user = req.body.name;
+      event.users.push(user);
+      event.save(function (err, updated) {
+        // if (err) { return next(err); }
+        res.send(updated);
+      });
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
+});
+
+router.put('/leave', passport.authenticate('jwt', { session: false}), function(req, res, next) {
+  var token = getToken(req.headers);
+  if (token) {
+    User.findOne({username: req.body.name}, function (err, user) {
+      var eventId = req.body.eventId;
+      var eIndex = user.eventList.findIndex(e => e.eventId == eventId);
+      if(eIndex !== -1){
+        user.eventList.splice(eIndex, 1);
+      }
+      user.save(function (err, updated) {
+        // if (err) { return next(err); }
+        res.send(updated);
+      });
+    });
+
+    Event.findById(req.body.eventId, function (err, event) {
+      var user = req.body.name;
+      var uIndex = event.users.findIndex(u => u === user);
+      if(uIndex !== -1){
+        event.users.splice(uIndex, 1);
+      }
+      event.save(function (err, updated) {
+        // if (err) { return next(err); }
+        res.send(updated);
+      });
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
+});
+*/

@@ -6,16 +6,16 @@ import './Event.css';
 
 class Event extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-          event: {},
-          participate: '',
-        };
-      }
+      super(props);
+      this.state = {
+        event: {},
+        participate: '',
+      };
+    }
 
     componentDidMount () {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
-        const name = localStorage.getItem('name');
+
         axios.get('/api/event/' + this.props.match.params.id)
         .then(res => {
             this.setState({ event: res.data });
@@ -26,7 +26,12 @@ class Event extends Component {
             }
           });
 
-        axios.get('/api/auth/all/' + name)
+        this.findUserByName();
+     }
+
+    findUserByName(){
+      const name = localStorage.getItem('name');
+      axios.get('/api/auth/all/' + name)
         .then(res => {
           const currentUser = res.data;
           const index = currentUser.eventList.findIndex(e=> e.eventId === this.props.match.params.id);
@@ -36,7 +41,7 @@ class Event extends Component {
           this.setState({ participate: true });
           }
         });
-     }
+    }
 
     delete(id){
       axios.delete('/api/event/'+id)

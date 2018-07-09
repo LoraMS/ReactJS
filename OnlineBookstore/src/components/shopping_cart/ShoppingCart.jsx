@@ -9,7 +9,6 @@ export default class ShoppingCart extends Component{
 
         this.state = {
             showCart: false,
-            // cart: this.props.cart,
         };
      }
 
