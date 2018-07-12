@@ -31,6 +31,7 @@ class Event extends Component {
           })
           .catch((error) => {
             if(error.response.status === 401) {
+              toastr.error('Unauthorized. Please Login!');
               this.props.history.push("/login");
             }
           });
@@ -54,7 +55,8 @@ class Event extends Component {
     delete(id){
       axios.delete('/api/event/'+id)
         .then((result) => {
-          this.props.history.push("/events");
+          toastr.success('Event delete successfully!');
+          this.props.history.push('/events');
         });
       }
 
@@ -67,11 +69,13 @@ class Event extends Component {
           this.setState({
             participate: true
           });
+          toastr.success('You leave this event!');
         })
         .catch((error) => {
-               if(error.response.status === 401) {
-               this.props.history.push("/login");
-              }
+          if(error.response.status === 401) {
+            toastr.error('Please Login!')
+            this.props.history.push("/login");
+          }
         });
       } else {
         axios.put('/api/auth/participate', {eventId, title, name})
@@ -79,11 +83,13 @@ class Event extends Component {
           this.setState({
             participate: false
           });
+          toastr.success('You take part in this event!');
         })
         .catch((error) => {
-               if(error.response.status === 401) {
-               this.props.history.push("/login");
-              }
+          if(error.response.status === 401) {
+            toastr.error('Please Login!');
+            this.props.history.push("/login");
+          }
         });
       }
     }
@@ -92,7 +98,6 @@ class Event extends Component {
         moment.locale('en');
         const label = this.state.participate ?  'Participate' : 'Leave';
         const role = localStorage.getItem('role');
-        console.log(this.state);
         return(
             <div className="container">
             <h3 className="event-title">{this.state.event.title}</h3>
@@ -109,7 +114,7 @@ class Event extends Component {
             <div className="bg-light p-3 mt-3 border">
             <h5><u>Details</u></h5>
             <p><strong>Date: </strong>{moment(this.state.event.eventDate).format('LL')}</p>
-            <p><strong>Time: </strong>{this.state.event.hours}</p>
+            <p><strong>Time: </strong>{this.state.event.hours}:00 pm</p>
             <p><strong>Event Category: </strong><Link to={`/evcategory/${this.state.event.category}`} className="category">{this.state.event.category}</Link></p>
             {role === 'admin' && <Link to={`/editev/${this.state.event._id}`} className="btn btn-sm btn-secondary mr-1">Edit</Link>}
             {role === 'admin' && <button onClick={this.delete.bind(this, this.state.event._id)} className="btn btn-sm btn-secondary mr-1">Delete</button>}

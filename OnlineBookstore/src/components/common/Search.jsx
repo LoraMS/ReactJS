@@ -8,14 +8,14 @@ class Search extends Component {
     render() {
         return(
             <div className="search">
-                <form class="form-inline mt-2 mt-md-0">
+                <form className="form-inline mt-2 mt-md-0">
                     <input 
-                    class="form-control mr-sm-2" 
+                    className="form-control mr-sm-2" 
                     type="search" 
                     placeholder="Search for ..." 
                     aria-label="Search"
                     onChange={this.props.search} />
-                    <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit" onClick={this.handleSubmit.bind(this)}>Search</button>
+                    <button className="btn btn-sm btn-secondary my-2 my-sm-0" type="submit" onClick={this.handleSubmit.bind(this)}>Search</button>
                 </form>
             </div>
         );

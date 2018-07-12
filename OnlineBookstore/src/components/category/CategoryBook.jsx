@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'toastr';
 import BooksComponent from './../books/catalog/BooksComponent';
 import './../books/catalog/Catalog.css';
 
@@ -20,6 +21,7 @@ export default class CategoryBook extends Component {
           })
           .catch((error) => {
             if(error.response.status === 401) {
+              toastr.error('Unauthorized. Please Login!');
               this.props.history.push("/catalog");
             }
           });

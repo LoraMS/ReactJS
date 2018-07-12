@@ -35,11 +35,13 @@ class CreateEvent extends Component {
 
     axios.post('/api/event', { title, description, eventDate, hours, imageURL, category })
       .then((result) => {
+        toastr.success('Event added successfully!');
         this.props.history.push("/events")
       })
       .catch((error) => {
         if(error.response.status === 401) {
-          this.setState({ message: 'Create failed. Check the form for errors' });
+          toastr.error('Create failed. Check the form for errors.');
+          this.setState({ message: error.response.data.message });
         }
       });
   }
@@ -52,7 +54,7 @@ class CreateEvent extends Component {
         <h2 className="create-title">
               Add Event
             </h2>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit.bind(this)}>
             {message !== '' &&
             <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {message}
@@ -66,12 +68,12 @@ class CreateEvent extends Component {
                   type="text"
                   value={title}
                   placeholder=" Title"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Title" />
               </div>
               <div className="form-group">
                 <label htmlFor="description" className="sr-only">Description:</label>
-                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                <textarea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textarea>
               </div>
               <div className="form-group">
                 <Input
@@ -79,7 +81,7 @@ class CreateEvent extends Component {
                   type="date"
                   value={eventDate}
                   placeholder=" Event Date"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Event Date" />
               </div>
               <div className="form-group">
@@ -88,7 +90,7 @@ class CreateEvent extends Component {
                   type="text"
                   value={hours}
                   placeholder=" Hours"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Hours" />
               </div>
               <div className="form-group">
@@ -97,7 +99,7 @@ class CreateEvent extends Component {
                   type="text"
                   value={category}
                   placeholder=" Category"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Category" />
               </div>
               <div className="form-group">
@@ -106,7 +108,7 @@ class CreateEvent extends Component {
                   type="text"
                   value={imageURL}
                   placeholder=" Image URL"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Image" />
                   <img src={this.state.imageURL} alt="img" />
               </div>

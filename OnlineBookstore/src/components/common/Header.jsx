@@ -8,7 +8,7 @@ export default class Header extends Component {
 
         return(
             <header>
-            <nav class="nav container">
+            <nav className="nav container">
                 <Link className="logo nav-link" to="/"><span>The Bookstore</span></Link>
                 <NavLink exact to="/" activeClassName="active" className="nav nav-link">Home</NavLink>
                 <NavLink to="/catalog" activeClassName="active" className="nav nav-link">Books</NavLink>
@@ -19,7 +19,7 @@ export default class Header extends Component {
                 {loggedIn && <NavLink to="/profile" activeClassName="active" className="nav  nav-link">Profile</NavLink>}
                 {loggedIn && <div className="dropdown">
                 <button className="btn dropdown-toggle btn-header" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <Link to="/create" className="dropdown-item nav nav-link">Create Book</Link>
                     <Link to="/add" className="dropdown-item nav nav-link">Create Event</Link>
                     <Link to="/list" className="dropdown-item nav nav-link">All User</Link>

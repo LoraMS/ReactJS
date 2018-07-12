@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router'
 import axios from 'axios';
 import moment from 'moment';
+import toastr from 'toastr';
 import EventsComponent from './EventsComponents';
 import Search from './../../common/Search';
 import PageNotFound from './../../common/PageNotFound';
@@ -25,7 +26,7 @@ class Events extends Component {
         })
           .catch((error) => {
             if(error.response.status === 401) {
-              this.props.history.push("/events");
+              this.props.history.push("/");
             }
           });
           
@@ -45,6 +46,7 @@ class Events extends Component {
                 .then((result) => {
                     // this.props.history.go(0);
                     this.props.history.push("/event/" + eventId);
+                    toastr.success('You leave the event.');
                 })
                 .catch((error) => {
                        if(error.response.status === 401) {
@@ -56,6 +58,7 @@ class Events extends Component {
                 .then((result) => {
                 // this.props.history.go(0);
                 this.props.history.push("/event/" + eventId);
+                toastr.success('You take part in this event.');
                 })
                 .catch((error) => {
                     if(error.response.status === 401) {

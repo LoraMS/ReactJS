@@ -54,7 +54,7 @@ class EditBook extends Component {
             <h2 className="edit-title">
               Edit Book
             </h2>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit.bind(this)}>
             {this.state.message !== '' &&
             <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {this.state.message}
@@ -69,7 +69,7 @@ class EditBook extends Component {
                   type="text"
                   value={this.state.book.isbn}
                   placeholder=" ISBN"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="ISBN" />
               </div>
               <div className="form-group">
@@ -78,7 +78,7 @@ class EditBook extends Component {
                   type="text"
                   value={this.state.book.title}
                   placeholder=" Title"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Title" />
               </div>
               <div className="form-group">
@@ -87,16 +87,16 @@ class EditBook extends Component {
                   type="text"
                   value={this.state.book.author}
                   placeholder=" Author"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Author" />
               </div>
               <div className="form-group">
                 <label for="short_description" className="sr-only">Short Description:</label>
-                <textArea className="form-control" name="shortDescription" onChange={this.onChange} placeholder="Short Description" cols="80" rows="2">{this.state.book.shortDescription}</textArea>
+                <textArea className="form-control" name="shortDescription" onChange={this.onChange.bind(this)} placeholder="Short Description" cols="80" rows="2">{this.state.book.shortDescription}</textArea>
               </div>
               <div className="form-group">
                 <label for="description" className="sr-only">Description:</label>
-                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.book.description}</textArea>
+                <textArea className="form-control" name="description" onChange={this.onChange.bind(this)} placeholder="Description" cols="80" rows="3">{this.state.book.description}</textArea>
               </div>
               <div className="form-group">
                 <Input
@@ -104,7 +104,7 @@ class EditBook extends Component {
                   type="number"
                   value={this.state.book.publishedYear}
                   placeholder=" Published Year"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Published Date" />
               </div>
               <div className="form-group">
@@ -113,7 +113,7 @@ class EditBook extends Component {
                   type="text"
                   value={this.state.book.publisher}
                   placeholder=" Publisher"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Publisher" />
               </div>
               <div className="form-group">
@@ -122,7 +122,7 @@ class EditBook extends Component {
                   type="text"
                   value={this.state.book.category}
                   placeholder=" Category"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Category" />
               </div>
               <div className="form-group">
@@ -131,7 +131,7 @@ class EditBook extends Component {
                   type="number"
                   value={this.state.book.price}
                   placeholder=" Price"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Price" />
               </div>
               <div className="form-group">
@@ -140,7 +140,7 @@ class EditBook extends Component {
                   type="text"
                   value={this.state.book.imageURL}
                   placeholder=" Image URL"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Image" />
                 <img src={this.state.book.imageURL} alt="img" />
               </div>

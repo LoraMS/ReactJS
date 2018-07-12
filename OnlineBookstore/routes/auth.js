@@ -164,7 +164,6 @@ router.put('/participate', passport.authenticate('jwt', { session: false}), func
 
       return Promise.all([user, event])
         .then(function(results){
-          console.log(results)
           results.map(item => item.save())
           res.send(results);
         });

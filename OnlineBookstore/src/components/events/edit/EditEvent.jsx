@@ -35,11 +35,13 @@ class EditEvent extends Component {
 
     axios.put('/api/event/'+this.props.match.params.id, { title, description, eventDate, hours, imageURL, category })
       .then((result) => {
-        this.props.history.push("/event/"+this.props.match.params.id)
+        toastr.success('Event edit successfully!');
+        this.props.history.push("/event/"+this.props.match.params.id);
       })
       .catch((error) => {
         if(error.response.status === 401) {
-          this.setState({ message: 'Edit failed. Check the form for errors' });
+          toastr.error('Edit failed. Check the form for errors.');
+          this.setState({ message: error.response.data.message });
         }
       });
   }

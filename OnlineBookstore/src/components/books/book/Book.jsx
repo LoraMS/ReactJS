@@ -47,8 +47,8 @@ class Book extends Component {
   delete(id){
     axios.delete('/api/book/'+id)
       .then((result) => {
-        toastr.success('Book delete successfully!')
-        this.props.history.push("/catalog")
+        toastr.success('Book delete successfully!');
+        this.props.history.push('/catalog');
       });
   }
 
@@ -61,10 +61,12 @@ class Book extends Component {
         this.setState({
           add: true
         });
+        toastr.success('Book removed from your list!');
       })
       .catch((error) => {
              if(error.response.status === 401) {
-             this.props.history.push("/login");
+              toastr.error('Unauthorized. Please Login!');
+              this.props.history.push("/login");
             }
       });
     } else {
@@ -73,10 +75,12 @@ class Book extends Component {
         this.setState({
           add: false
         });
+        toastr.success('Book added to your list!');
       })
       .catch((error) => {
              if(error.response.status === 401) {
-             this.props.history.push("/login");
+              toastr.error('Unauthorized. Please Login!');
+              this.props.history.push("/login");
             }
       });
     }

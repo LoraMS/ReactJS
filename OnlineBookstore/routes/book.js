@@ -24,37 +24,37 @@ function validateForm (payload) {
   let success = true;
   let message = '';
 
-  if (!payload || typeof payload.isbn !== 'string' || payload.isbn.length < 2) {
+  if (!payload || typeof payload.isbn !== 'string' || payload.isbn.trim().length < 2) {
     success = false
     message = 'ISBN must be more than 2 symbols.'
   }
 
-  if (!payload || typeof payload.title !== 'string' || payload.title.length < 5) {
+  if (!payload || typeof payload.title !== 'string' || payload.title.trim().length < 5) {
     success = false
     message = 'Title must be more than 5 symbols.'
   }
 
-  if (!payload || typeof payload.author !== 'string' || payload.author.length < 2) {
+  if (!payload || typeof payload.author !== 'string' || payload.author.trim().length < 2) {
     success = false
     message = 'Author must be more than 2 symbols.'
   }
 
-  if (!payload || typeof payload.shortDescription !== 'string' || payload.shortDescription.length < 10) {
+  if (!payload || typeof payload.shortDescription !== 'string' || payload.shortDescription.trim().length < 10) {
     success = false
     message = 'Description must be more than 10 symbols.'
   }
 
-  if (!payload || typeof payload.description !== 'string' || payload.description.length < 100) {
+  if (!payload || typeof payload.description !== 'string' || payload.description.trim().length < 100) {
     success = false
     message = 'Description must be more than 100 symbols.'
   }
 
-  if (!payload || typeof payload.publisher !== 'string' || payload.publisher.length < 2) {
+  if (!payload || typeof payload.publisher !== 'string' || payload.publisher.trim().length < 2) {
     success = false
     message = 'Publisher must be more than 2 symbols.'
   }
 
-  if (!payload || typeof payload.category !== 'string' || payload.category.length < 5) {
+  if (!payload || typeof payload.category !== 'string' || payload.category.trim().length < 5) {
     success = false
     message = 'Category is required.'
   }
@@ -94,7 +94,7 @@ router.get('/', function(req, res, next) {
     Book.find(function (err, products) {
       if (err) return next(err);
       res.json(products);
-    });
+    }).sort({isbn: 1});
   });
 
 
@@ -138,7 +138,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), function(req, 
     });
   }
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.  Please Login.'});
+    return res.status(403).send({success: false, msg: 'Unauthorized. Please Login.'});
   }
 });
 

@@ -19,7 +19,7 @@ export default class EventsComponent extends Component {
                         <Link to={`/event/${event._id}`}>
                             <h5 className="card-title text-muted"><u>{event.title}</u></h5>
                         </Link>
-                        <p>{moment(event.eventDate).format('LL')} | {event.hours}</p>
+                        <p>{moment(event.eventDate).format('LL')} | {event.hours}:00 pm</p>
                         <p><Link to={`/evcategory/${event.category}`} className="category">{event.category}</Link></p>
                         <Link to={`/event/${event._id}`} type="button" className="btn btn-sm btn-secondary mr-2">View More</Link>
                         {this.props.buttonPart && moment(event.eventDate).isSameOrAfter() ? (

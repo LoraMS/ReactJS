@@ -67,7 +67,7 @@ class CreateBook extends Component {
         <h2 className="create-title">
               Add Book
             </h2>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit.bind(this)}>
             {message !== '' &&
             <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {message}
@@ -82,7 +82,7 @@ class CreateBook extends Component {
                   type="text"
                   value={isbn}
                   placeholder=" ISBN"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="ISBN" />
               </div>
               <div className="form-group">
@@ -91,7 +91,7 @@ class CreateBook extends Component {
                   type="text"
                   value={title}
                   placeholder=" Title"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Title" />
               </div>
               <div className="form-group">
@@ -100,16 +100,16 @@ class CreateBook extends Component {
                   type="text"
                   value={author}
                   placeholder=" Author"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Author" />
               </div>
               <div className="form-group">
                 <label htmlFor="short_description" className="sr-only">Short Description:</label>
-                <textArea className="form-control" name="shortDescription" onChange={this.onChange} placeholder="Short Description" cols="80" rows="2">{shortDescription}</textArea>
+                <textarea className="form-control" name="shortDescription" onChange={this.onChange.bind(this)} placeholder="Short Description" cols="80" rows="2">{shortDescription}</textarea>
               </div>
               <div className="form-group">
                 <label htmlFor="description" className="sr-only">Description:</label>
-                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                <textarea className="form-control" name="description" onChange={this.onChange.bind(this)} placeholder="Description" cols="80" rows="3">{description}</textarea>
               </div>
               <div className="form-group">
                 <Input
@@ -117,7 +117,7 @@ class CreateBook extends Component {
                   type="number"
                   value={publishedYear}
                   placeholder=" Published Year"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Published Date" />
               </div>
               <div className="form-group">
@@ -126,7 +126,7 @@ class CreateBook extends Component {
                   type="text"
                   value={publisher}
                   placeholder=" Publisher"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Publisher" />
               </div>
               <div className="form-group">
@@ -135,7 +135,7 @@ class CreateBook extends Component {
                   type="text"
                   value={category}
                   placeholder=" Category"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Category" />
               </div>
               <div className="form-group">
@@ -144,7 +144,7 @@ class CreateBook extends Component {
                   type="number"
                   value={price}
                   placeholder=" Price"
-                  onChange={this.onChange}
+                  onChange={this.onChange.bind(this)}
                   label="Price" />
               </div>
               <div className="form-group">

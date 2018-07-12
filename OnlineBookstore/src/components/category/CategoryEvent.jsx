@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import toastr from 'toastr';
 import EventsComponent from './../events/events/EventsComponents';
 import './../events/events/Events.css';
 
@@ -21,7 +22,8 @@ export default class CategoryEvent extends Component {
           })
           .catch((error) => {
             if(error.response.status === 401) {
-              this.props.history.push("/login");
+                toastr.error('Unauthorized. Please Login!');
+                this.props.history.push("/login");
             }
           });
       }
