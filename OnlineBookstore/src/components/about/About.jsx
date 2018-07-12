@@ -50,7 +50,7 @@ export default class About extends Component {
                         </div>
                     </div>
                     <div className="col-md-8 map">
-                        <div class="embed-responsive embed-responsive-4by3 embed-location">
+                        <div className="embed-responsive embed-responsive-4by3 embed-location">
                         <iframe width="600" height="450" frameborder="0" title="map"
                         src="https://www.google.com/maps/embed/v1/place?q=1423+Broadway,+Oakland,+CA+94612&key=AIzaSyA30gTZgdEDO-4X0Y-nroAlnxJlf0aZlJs" allowfullscreen></iframe>
                         </div>

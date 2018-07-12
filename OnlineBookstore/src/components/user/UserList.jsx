@@ -35,7 +35,7 @@ export default class UserList extends Component {
         return (
             <div className="container">
                <div id="users">
-               <table class="table">
+               <table className="table">
                    <thead>
                        <tr>
                            <th>Avatar Image</th>
@@ -52,7 +52,7 @@ export default class UserList extends Component {
                            <td>{user.username}</td>
                            <td>{user.email}</td>
                            <td>{user.role}</td>
-                           <td><button onClick={this.delete.bind(this, user._id)} class="btn btn-sm btn-secondary mr-1">Delete</button></td>
+                           <td><button onClick={this.delete.bind(this, user._id)} className="btn btn-sm btn-secondary mr-1">Delete</button></td>
                        </tr>
                        )}
                    </tbody>

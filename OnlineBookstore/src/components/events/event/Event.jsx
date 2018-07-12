@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import toastr from 'toastr';
 import './Event.css';
 
 class Event extends Component {
@@ -15,33 +16,40 @@ class Event extends Component {
 
     componentDidMount () {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+        const name = localStorage.getItem('name');
 
         axios.get('/api/event/' + this.props.match.params.id)
         .then(res => {
             this.setState({ event: res.data });
+
+            const index = this.state.event.users.findIndex(u => u === name);
+            if(index > -1){
+              this.setState({ participate: false });
+            } else {
+            this.setState({ participate: true });
+            }
           })
           .catch((error) => {
             if(error.response.status === 401) {
               this.props.history.push("/login");
             }
           });
-
-        this.findUserByName();
+        // this.findUserByName();
      }
 
-    findUserByName(){
-      const name = localStorage.getItem('name');
-      axios.get('/api/auth/all/' + name)
-        .then(res => {
-          const currentUser = res.data;
-          const index = currentUser.eventList.findIndex(e=> e.eventId === this.props.match.params.id);
-          if(index > -1){
-            this.setState({ participate: false });
-          } else {
-          this.setState({ participate: true });
-          }
-        });
-    }
+    // findUserByName(){
+    //   const name = localStorage.getItem('name');
+    //   axios.get('/api/auth/all/' + name)
+    //     .then(res => {
+    //       const currentUser = res.data;
+    //       const index = currentUser.eventList.findIndex(e=> e.eventId === this.props.match.params.id);
+    //       if(index > -1){
+    //         this.setState({ participate: false });
+    //       } else {
+    //       this.setState({ participate: true });
+    //       }
+    //     });
+    // }
 
     delete(id){
       axios.delete('/api/event/'+id)
@@ -84,7 +92,7 @@ class Event extends Component {
         moment.locale('en');
         const label = this.state.participate ?  'Participate' : 'Leave';
         const role = localStorage.getItem('role');
-
+        console.log(this.state);
         return(
             <div className="container">
             <h3 className="event-title">{this.state.event.title}</h3>

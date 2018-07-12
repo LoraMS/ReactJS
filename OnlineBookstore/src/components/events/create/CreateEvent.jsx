@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'toastr';
 import Input from './../../common/Input';
 
 class CreateEvent extends Component {
@@ -12,7 +13,7 @@ class CreateEvent extends Component {
       hours: '',
       imageURL: '',
       category: '',
-      reviews: null,
+      users: null,
       message: '',
     };
   }
@@ -46,20 +47,20 @@ class CreateEvent extends Component {
   render() {
     const { title, description, eventDate, hours, imageURL, category, message } = this.state;
     return (
-      <div class="container">
-        <div class="panel">
-        <h2 class="create-title">
+      <div className="container">
+        <div className="panel">
+        <h2 className="create-title">
               Add Event
             </h2>
             <form onSubmit={this.onSubmit}>
             {message !== '' &&
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {message}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>}
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="title"
                   type="text"
@@ -68,11 +69,11 @@ class CreateEvent extends Component {
                   onChange={this.onChange}
                   label="Title" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="description" className="sr-only">Description:</label>
-                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="eventDate"
                   type="date"
@@ -81,7 +82,7 @@ class CreateEvent extends Component {
                   onChange={this.onChange}
                   label="Event Date" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="hours"
                   type="text"
@@ -90,7 +91,7 @@ class CreateEvent extends Component {
                   onChange={this.onChange}
                   label="Hours" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="category"
                   type="text"
@@ -99,7 +100,7 @@ class CreateEvent extends Component {
                   onChange={this.onChange}
                   label="Category" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                   <Input
                   name="imageURL"
                   type="text"
@@ -109,7 +110,7 @@ class CreateEvent extends Component {
                   label="Image" />
                   <img src={this.state.imageURL} alt="img" />
               </div>
-              <button type="submit" class="btn btn-secondary">Add Event</button>
+              <button type="submit" className="btn btn-secondary">Add Event</button>
             </form>
         </div>
       </div>

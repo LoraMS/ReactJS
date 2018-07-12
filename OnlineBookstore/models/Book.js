@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 
-//validations
-
 var ReviewsSchema = new mongoose.Schema({ 
   author: String,
   content: String,
@@ -9,16 +7,48 @@ var ReviewsSchema = new mongoose.Schema({
 });
 
 var BookSchema = new mongoose.Schema({
-    isbn: String,
-    title: String,
-    author: String,
-    shortDescription: String,
-    description: String,
-    publishedYear: String,
-    publisher: String,
-    imageURL: String,
-    price: {type: Number, min: 1, max: 100},
-    category: String,
+    isbn: {
+      type: String,
+      required: true
+  },
+    title: {
+        type: String,
+        required: true
+    },
+    author: {
+      type: String,
+      required: true
+  },
+    shortDescription: {
+      type: String,
+      required: true
+  },
+    description: {
+      type: String,
+      required: true
+  },
+    publishedYear: {
+      type: String,
+      required: true
+  },
+    publisher: {
+      type: String,
+      required: true
+  },
+    imageURL: {
+      type: String,
+      required: true
+  },
+    price: {
+      type: Number, 
+      min: 1, 
+      max: 100,
+      required: true
+    },
+    category: {
+      type: String,
+      required: true
+  },
     tags: [{ type: String }],
     reviews: [ReviewsSchema],
     published_date: { type: Date, default: Date.now },

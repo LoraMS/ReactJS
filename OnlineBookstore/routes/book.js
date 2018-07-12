@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Book = require('../models/Book.js');
+const express = require('express');
+const router = express.Router();
+const validator = require('validator');
+const mongoose = require('mongoose');
+const Book = require('../models/Book.js');
 
-var passport = require('passport');
+const passport = require('passport');
 require('../config/passport')(passport);
 
 getToken = function (headers) {
@@ -18,6 +19,75 @@ getToken = function (headers) {
     return null;
   }
 };
+
+function validateForm (payload) {
+  let success = true;
+  let message = '';
+
+  if (!payload || typeof payload.isbn !== 'string' || payload.isbn.length < 2) {
+    success = false
+    message = 'ISBN must be more than 2 symbols.'
+  }
+
+  if (!payload || typeof payload.title !== 'string' || payload.title.length < 5) {
+    success = false
+    message = 'Title must be more than 5 symbols.'
+  }
+
+  if (!payload || typeof payload.author !== 'string' || payload.author.length < 2) {
+    success = false
+    message = 'Author must be more than 2 symbols.'
+  }
+
+  if (!payload || typeof payload.shortDescription !== 'string' || payload.shortDescription.length < 10) {
+    success = false
+    message = 'Description must be more than 10 symbols.'
+  }
+
+  if (!payload || typeof payload.description !== 'string' || payload.description.length < 100) {
+    success = false
+    message = 'Description must be more than 100 symbols.'
+  }
+
+  if (!payload || typeof payload.publisher !== 'string' || payload.publisher.length < 2) {
+    success = false
+    message = 'Publisher must be more than 2 symbols.'
+  }
+
+  if (!payload || typeof payload.category !== 'string' || payload.category.length < 5) {
+    success = false
+    message = 'Category is required.'
+  }
+
+  if (!payload || typeof payload.imageURL !== 'string' || !validator.isURL(payload.imageURL)) {
+    success = false
+    message = 'Image URL is no correct.'
+  }
+
+  if (!payload || payload.price < 0) {
+    success = false
+    message = 'Price must be a positive number between 1 and 100.'
+  }
+
+  return {
+    success,
+    message,
+  }
+}
+
+function validateCommentForm (payload) {
+  let success = true;
+  let message = '';
+
+  if (!payload || typeof payload.content !== 'string' || payload.content.length < 2) {
+    success = false
+    message = 'Comment must be more than 2 symbols.'
+  }
+  return {
+    success,
+    message,
+  }
+}
 
 /* Get All Books */
 router.get('/', function(req, res, next) {
@@ -37,7 +107,7 @@ router.get('/category/:name', passport.authenticate('jwt', { session: false}), f
     res.json(products);
   });
 } else {
-      return res.status(403).send({success: false, msg: 'Unauthorized.'});
+      return res.status(403).send({success: false, msg: 'Unauthorized. Please Login.'});
     }
 });
 
@@ -50,7 +120,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false}), function(req
       res.json(books);
     });
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send({success: false, msg: 'Unauthorized.  Please Login.'});
   }
 });
 
@@ -58,12 +128,17 @@ router.get('/:id', passport.authenticate('jwt', { session: false}), function(req
 router.post('/', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
-    Book.create(req.body, function (err, post) {
-      if (err) return next(err);
+    const validationResult = validateForm(req.body);
+    if (!validationResult.success) {
+        res.status(401).send({success: false,  message: validationResult.message});
+    }  else {
+      Book.create(req.body, function (err, post) {
+      if (err) return next(err);  
       res.json(post);
     });
+  }
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send({success: false, msg: 'Unauthorized.  Please Login.'});
   }
 });
 
@@ -71,12 +146,17 @@ router.post('/', passport.authenticate('jwt', { session: false}), function(req, 
 router.put('/:id', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
+    const validationResult = validateForm(req.body);
+    if (!validationResult.success) {
+        res.status(401).send({success: false,  message: validationResult.message});
+    }  else {
     Book.findByIdAndUpdate(req.params.id,req.body, function (err, post) {
       if (err) return next(err);
       res.json(post);
     });
+  }
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send({success: false, msg: 'Unauthorized.  Please Login.'});
   }
 });
 
@@ -89,7 +169,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}), function(
       res.json(post);
     });
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send({success: false, msg: 'Unauthorized.  Please Login.'});
   }
 });
 
@@ -97,6 +177,10 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}), function(
 router.put('/:id/comments', passport.authenticate('jwt', { session: false}), function(req, res, next) {
   var token = getToken(req.headers);
   if (token) {
+    const validationResult = validateCommentForm(req.body);
+    if(!validationResult.success){
+      res.status(401).send({success: false,  message: validationResult.message});
+    } else {
     Book.findById(req.params.id, function (err, book) {
       if (err) { return next(err); }
       if (!book) { return res.send(404); }
@@ -107,13 +191,10 @@ router.put('/:id/comments', passport.authenticate('jwt', { session: false}), fun
         if (err) { return next(err); }
         res.send(updated);
       });
-      // book.reviews = book.reviews || [];
-      // book.reviews.push(req.body);
-      // console.log(req.body)// { author: 'user', content: 'hello' }
-      // res.json(book);
     });
+  }
   } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+    return res.status(403).send({success: false, msg: 'Unauthorized.  Please Login.'});
   }
 });
 

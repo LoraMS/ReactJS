@@ -27,16 +27,16 @@ export default class CategoryBook extends Component {
 
       render() {
         return (
-          <div class="container">
-            <div class="panel">
+          <div className="container">
+            <div className="panel">
               <div>
-                <h2 class="page-title">
+                <h2 className="page-title">
                   Books in Category {this.props.match.params.name}
                 </h2>
               </div>
-              <div class="album py-5">
-                <div class="container">
-                  <div class="row">
+              <div className="album py-5">
+                <div className="container">
+                  <div className="row">
                   <BooksComponent books={this.state.books} buttonCart={this.state.buttonCart}/>
                 </div>
                 </div>

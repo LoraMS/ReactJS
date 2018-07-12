@@ -20,9 +20,9 @@ export default class Header extends Component {
                 {loggedIn && <div className="dropdown">
                 <button className="btn dropdown-toggle btn-header" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <Link to="/create" class="dropdown-item nav nav-link">Create Book</Link>
-                    <Link to="/add" class="dropdown-item nav nav-link">Create Event</Link>
-                    <Link to="/list" class="dropdown-item nav nav-link">All User</Link>
+                    <Link to="/create" className="dropdown-item nav nav-link">Create Book</Link>
+                    <Link to="/add" className="dropdown-item nav nav-link">Create Event</Link>
+                    <Link to="/list" className="dropdown-item nav nav-link">All User</Link>
                 </div>
                 </div>}
                 {loggedIn && <a href="javascript:void(0)" onClick={onLogout} className="nav nav-link">Logout</a>}

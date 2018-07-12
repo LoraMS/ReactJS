@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'toastr';
 import { Link } from 'react-router-dom';
 import Input from './../../common/Input';
 import './EditBook.css';
@@ -35,32 +36,34 @@ class EditBook extends Component {
 
     axios.put('/api/book/'+this.props.match.params.id, { isbn, title, author, shortDescription, description, publishedYear, publisher, imageURL, price, category })
       .then((result) => {
+        toastr.success('Book edit successfully!');
         this.props.history.push("/book/"+this.props.match.params.id)
       })
       .catch((error) => {
         if(error.response.status === 401) {
-          this.setState({ message: 'Edit failed. Check the form for errors' });
+          toastr.error('Edit failed. Check the form for errors.');
+          this.setState({ message: error.response.data.message });
         }
       });
   }
 
   render() {
     return (
-      <div class="container">
-        <div class="panel">
-            <h2 class="edit-title">
+      <div className="container">
+        <div className="panel">
+            <h2 className="edit-title">
               Edit Book
             </h2>
             <form onSubmit={this.onSubmit}>
             {this.state.message !== '' &&
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {this.state.message}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
           }
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="isbn"
                   type="text"
@@ -69,7 +72,7 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="ISBN" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="title"
                   type="text"
@@ -78,7 +81,7 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="Title" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="author"
                   type="text"
@@ -87,15 +90,15 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="Author" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="short_description" className="sr-only">Short Description:</label>
-                <textArea class="form-control" name="shortDescription" onChange={this.onChange} placeholder="Short Description" cols="80" rows="2">{this.state.book.shortDescription}</textArea>
+                <textArea className="form-control" name="shortDescription" onChange={this.onChange} placeholder="Short Description" cols="80" rows="2">{this.state.book.shortDescription}</textArea>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="description" className="sr-only">Description:</label>
-                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.book.description}</textArea>
+                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.book.description}</textArea>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="publishedYear"
                   type="number"
@@ -104,7 +107,7 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="Published Date" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="publisher"
                   type="text"
@@ -113,7 +116,7 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="Publisher" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="category"
                   type="text"
@@ -122,7 +125,7 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="Category" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="price"
                   type="number"
@@ -131,7 +134,7 @@ class EditBook extends Component {
                   onChange={this.onChange}
                   label="Price" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                   <Input
                   name="imageURL"
                   type="text"
@@ -141,8 +144,8 @@ class EditBook extends Component {
                   label="Image" />
                 <img src={this.state.book.imageURL} alt="img" />
               </div>
-              <Link to={`/book/${this.state.book._id}`} class="btn btn-secondary mr-3">Back to Book</Link>
-              <button type="submit" class="btn btn-secondary">Edit Book</button>
+              <Link to={`/book/${this.state.book._id}`} className="btn btn-secondary mr-3">Back to Book</Link>
+              <button type="submit" className="btn btn-secondary">Edit Book</button>
             </form>
         </div>
       </div>

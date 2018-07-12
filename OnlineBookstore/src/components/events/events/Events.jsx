@@ -43,8 +43,8 @@ class Events extends Component {
                if(index > -1){
                 axios.put('/api/auth/leave', {eventId, name})
                 .then((result) => {
-                    // console.log(result);
-                    this.props.history.go(0);
+                    // this.props.history.go(0);
+                    this.props.history.push("/event/" + eventId);
                 })
                 .catch((error) => {
                        if(error.response.status === 401) {
@@ -54,8 +54,8 @@ class Events extends Component {
                } else {
                 axios.put('/api/auth/participate', {eventId, title, name})
                 .then((result) => {
-                //   console.log(result);
-                this.props.history.go(0);
+                // this.props.history.go(0);
+                this.props.history.push("/event/" + eventId);
                 })
                 .catch((error) => {
                     if(error.response.status === 401) {

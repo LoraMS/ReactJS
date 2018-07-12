@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'toastr';
 import { Link } from 'react-router-dom';
 import {withRouter} from 'react-router';
 import AddComment from './../../comments/add_comment/AddComment';
@@ -26,6 +27,7 @@ class Book extends Component {
       })
       .catch((error) => {
         if(error.response.status === 401) {
+          toastr.error('Unauthorized! Please Login!');
           this.props.history.push("/login");
         }
       });
@@ -45,6 +47,7 @@ class Book extends Component {
   delete(id){
     axios.delete('/api/book/'+id)
       .then((result) => {
+        toastr.success('Book delete successfully!')
         this.props.history.push("/catalog")
       });
   }
@@ -109,14 +112,14 @@ class Book extends Component {
     const role = localStorage.getItem('role');
 
     return (
-      <div class="container">
-        <div class="panel">
-          <div class="container">
-              <div class="row">
-                <div class="col-md-4">
-                  <img class="mb-3 show-img" src={this.state.book.imageURL} alt="book" />
+      <div className="container">
+        <div className="panel">
+          <div className="container">
+              <div className="row">
+                <div className="col-md-4">
+                  <img className="mb-3 show-img" src={this.state.book.imageURL} alt="book" />
                 </div>
-                <div class="col-md-8">
+                <div className="col-md-8">
                     <h5><u>{this.state.book.title}</u></h5>
                     <p>{this.state.book.author}</p>
                     <p>{this.state.book.shortDescription}</p>
@@ -134,27 +137,27 @@ class Book extends Component {
                 </div>
               </div>
             </div>
-            <div class="details-content bg-light mb-3 p-3 border">
+            <div className="details-content bg-light mb-3 p-3 border">
               <h5><u>Details</u></h5>
               <p><strong>Category: </strong><Link to={`/category/${this.state.book.category}`} className="category">{this.state.book.category}</Link></p>
               <p><strong>Tags: </strong>React, Web Development</p>
               <p><strong>Publisher: </strong>{this.state.book.publisher}</p>
               <p><strong>Year of publishing: </strong>{this.state.book.publishedYear}</p>
               <p><strong>Product ID: </strong>{this.state.book.isbn}</p>
-              <div class="mt-3">
-                {role === 'admin' && <Link to={`/edit/${this.state.book._id}`} class="btn btn-sm btn-secondary mr-1">Edit</Link>}
-                {role === 'admin' && <button onClick={this.delete.bind(this, this.state.book._id)} class="btn btn-sm btn-secondary mr-1">Delete</button>}
+              <div className="mt-3">
+                {role === 'admin' && <Link to={`/edit/${this.state.book._id}`} className="btn btn-sm btn-secondary mr-1">Edit</Link>}
+                {role === 'admin' && <button onClick={this.delete.bind(this, this.state.book._id)} className="btn btn-sm btn-secondary mr-1">Delete</button>}
                 <button type="button" className={!this.state.isAdded ? "btn btn-sm btn-secondary mr-1" : "btn btn-sm btn-secondary mr-1 added"} onClick={this.addToCart.bind(this, this.state.book.imageURL, this.state.book.title, this.state.book.price, this.state.book._id)}>{!this.state.isAdded ? "Add to Cart" : "✔ Added"}</button>
                 <button onClick={this.bookAction.bind(this, this.state.book._id, this.state.book.title)} type="button" className="btn btn-sm btn-secondary">{label} Book List</button>
                   </div>
             </div>
-            <div class="reviews-form bg-light p-3 mb-3 border">
+            <div className="reviews-form bg-light p-3 mb-3 border">
               <h5><u>Add Review</u></h5>
               <div className="review-add">
                 <AddComment id={this.props.match.params.id}/>
               </div>
             </div>
-            <div class="reviews-content bg-light p-3 mb-3 border">
+            <div className="reviews-content bg-light p-3 mb-3 border">
               <h5 className="mb-3"><u>Reviews</u></h5>
               {rArray.length === 0 && <div>This book has no reviews yet.</div> }
               {rArray.length > 0 && rArray.map((review) => {

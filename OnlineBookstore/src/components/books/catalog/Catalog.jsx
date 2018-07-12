@@ -72,18 +72,18 @@ class Catalog extends Component {
     }
 
     return (
-      <div class="container">
-        <div class="panel">
+      <div className="container">
+        <div className="panel">
           <div className="row">
             <div className="col-md-4">
-              <h2 class="page-title">Book Catalog</h2>
+              <h2 className="page-title">Book Catalog</h2>
             </div>
             <div className="col-md-4 offset-md-4">
               <Search search={this.handleSearch.bind(this)}/>
             </div>
           </div>
-          <div class="album py-5">
-            <div class="row">
+          <div className="album py-5">
+            <div className="row">
               {view}
             </div>
           </div>

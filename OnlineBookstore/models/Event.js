@@ -1,16 +1,35 @@
 var mongoose = require('mongoose');
 
-//validations
-
 var EventSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    eventDate: Date,
-    hours: String,
-    imageURL: String,
-    category: String,
+    title: {
+      type: String,
+      required: true
+  },
+    description: {
+      type: String,
+      required: true
+  },
+    eventDate: {
+      type: Date,
+      required: true
+  },
+    hours: {
+      type: String,
+      required: true
+  },
+    imageURL: {
+      type: String,
+      required: true
+  },
+    category: {
+      type: String,
+      required: true
+  },
     users: [{ type: String }],
-    published_date: { type: Date, default: Date.now },
+    published_date: { 
+      type: Date, 
+      default: Date.now 
+    },
   });
 
   module.exports = mongoose.model('Event', EventSchema);

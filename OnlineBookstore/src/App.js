@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import toastr from 'toastr';
 import {withRouter} from 'react-router';
 import Home from './components/home/HomePage';
 import Catalog from './components/books/catalog/Catalog';
@@ -128,6 +129,7 @@ class App extends Component {
     localStorage.removeItem('name');
     localStorage.removeItem('email');
     localStorage.removeItem('role');
+    toastr.success('Logout successful!');
     window.location.replace('/');
   } 
 

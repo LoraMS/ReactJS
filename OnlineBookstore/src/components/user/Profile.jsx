@@ -27,7 +27,8 @@ export default class Profile extends Component {
      }
 
     render() {
-        const imgURL = 'https://drive.google.com/thumbnail?id=11uo_6bgKcjtkZkSJQYj47CTa-_C-hh0P';
+        // const imgURL = 'https://drive.google.com/thumbnail?id=11uo_6bgKcjtkZkSJQYj47CTa-_C-hh0P';
+        const imgURL = "https://drive.google.com/thumbnail?id=1ko7YsuM3AcLosL_LJe47eBCrRWCQITVW";
         const eList = this.state.user.eventList || [];
         const bList = this.state.user.bookList || [];
         return (

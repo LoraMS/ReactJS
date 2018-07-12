@@ -21,7 +21,7 @@ export default class CategoryEvent extends Component {
           })
           .catch((error) => {
             if(error.response.status === 401) {
-              this.props.history.push("/events");
+              this.props.history.push("/login");
             }
           });
       }
@@ -30,30 +30,8 @@ export default class CategoryEvent extends Component {
         moment.locale('en');
         return(
             <div className="container">
-                <h2 class="event-title">Events in Category {this.props.match.params.name}</h2>
+                <h2 className="event-title">Events in Category {this.props.match.params.name}</h2>
                 <EventsComponent events={this.state.events} buttonCart={this.state.buttonPart}/>
-                {/* {this.state.events.map(event=>    
-                    <div class="row mt-3 pt-2 pb-2 bg-light" key={event._id}>
-                        <div className="col-md-2">
-                            <Link to={`/event/${event._id}`}>
-                                <img class="events-img" src={event.imageURL} alt="event" data-holder-rendered="true"/>
-                            </Link>
-                        </div>
-                        <div className="col-md-8 offset-md-1">
-                            <Link to={`/event/${event._id}`}>
-                                <h5 class="card-title text-muted"><u>{event.title}</u></h5>
-                            </Link>
-                            <p>{moment(event.eventDate).format('LL')} | {event.hours}</p>
-                            <p><Link to={`/evcategory/${event.category}`} className="category">{event.category}</Link></p>
-                            <Link to={`/event/${event._id}`} type="button" class="btn btn-sm btn-secondary mr-2">View More</Link>
-                            {moment(event.eventDate).isSameOrAfter() ? (
-                                <button onClick={this.eventAction.bind(this, event._id, event.title)} type="button" className="btn btn-sm btn-secondary mr-1">{label}</button>
-                            ) : (
-                                <span className="event-title">This Event Has Passed</span>
-                            )}
-                        </div>
-                    </div>
-                )} */}
             </div>
         );
     }

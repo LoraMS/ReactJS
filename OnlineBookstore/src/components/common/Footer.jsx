@@ -4,7 +4,7 @@ const Footer = (props) => {
     return(
         <footer className="footer">
             <div className="container">
-                <span class="text-muted">Online Bookstore React SPA &copy; 2018</span>
+                <span className="text-muted">Online Bookstore React SPA &copy; 2018</span>
             </div>
         </footer>
     );

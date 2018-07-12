@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'toastr';
 import Input from './../common/Input.jsx';
 import './Login.css';
 
@@ -34,11 +35,13 @@ class Register extends Component {
     axios.post('/api/auth/register', { username, email, password })
       .then((result) => {
         this.setState({ message: '' });
+        toastr.success('Register successful!');
         this.props.history.push("/login")
       })
       .catch((error) => {
         if(error.response.status === 401) {
-          this.setState({ message: 'Register failed. Check the form for errors' });
+          toastr.error('Register failed!Check the form for errors!');
+          this.setState({ message: error.response.data.message });
         }
       });
   }
@@ -46,17 +49,17 @@ class Register extends Component {
   render() {
     const { username, email, password, confirm, message } = this.state;
     return (
-      <div class="container">
-        <form class="form-signin" onSubmit={this.onSubmit}>
+      <div className="container">
+        <form className="form-signin" onSubmit={this.onSubmit}>
         {message !== '' &&
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {message}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
           }
-          <h2 class="form-signin-heading">Please Register</h2>
+          <h2 className="form-signin-heading">Please Register</h2>
           <Input
             name="username"
             type="text"
@@ -85,7 +88,7 @@ class Register extends Component {
             placeholder="Confirm Password"
             onChange={this.onChange}
             label="Confirm Password" />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+          <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         </form>
       </div>
     );

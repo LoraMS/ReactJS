@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import toastr from 'toastr';
 import { Link } from 'react-router-dom';
 import Input from './../../common/Input';
 
@@ -45,21 +46,21 @@ class EditEvent extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel">
-            <h2 class="edit-title">
+      <div className="container">
+        <div className="panel">
+            <h2 className="edit-title">
               Edit Event
             </h2>
             <form onSubmit={this.onSubmit}>
             {this.state.message !== '' &&
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div className="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>Error</strong> {this.state.message}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
           }
-              <div class="form-group">
+              <div className="form-group">
               <Input
                   name="title"
                   type="text"
@@ -68,11 +69,11 @@ class EditEvent extends Component {
                   onChange={this.onChange}
                   label="Title" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="description" className="sr-only">Description:</label>
-                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.event.description}</textArea>
+                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.event.description}</textArea>
               </div>
-              <div class="form-group">
+              <div className="form-group">
               <Input
                   name="eventDate"
                   type="text"
@@ -81,7 +82,7 @@ class EditEvent extends Component {
                   onChange={this.onChange}
                   label="Event Date" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
               <Input
                   name="hours"
                   type="text"
@@ -90,7 +91,7 @@ class EditEvent extends Component {
                   onChange={this.onChange}
                   label="Hours" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <Input
                   name="category"
                   type="text"
@@ -99,7 +100,7 @@ class EditEvent extends Component {
                   onChange={this.onChange}
                   label="Category" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                   <Input
                   name="imageURL"
                   type="text"
@@ -109,8 +110,8 @@ class EditEvent extends Component {
                   label="Image" />
                 <img src={this.state.event.imageURL} alt="img" />
               </div>
-              <Link to={`/event/${this.state.event._id}`} class="btn btn-secondary mr-3">Back to Event</Link>
-              <button type="submit" class="btn btn-secondary">Edit Event</button>
+              <Link to={`/event/${this.state.event._id}`} className="btn btn-secondary mr-3">Back to Event</Link>
+              <button type="submit" className="btn btn-secondary">Edit Event</button>
             </form>
         </div>
       </div>

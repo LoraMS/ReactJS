@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Event = require('../models/Event.js');
+const express = require('express');
+const router = express.Router();
+const validator = require('validator');
+const mongoose = require('mongoose');
+const Event = require('../models/Event.js');
 
-var passport = require('passport');
+const passport = require('passport');
 require('../config/passport')(passport);
 
 getToken = function (headers) {
@@ -18,6 +19,8 @@ getToken = function (headers) {
     return null;
   }
 };
+
+
 
 router.get('/', function(req, res, next) {
     Event.find(function (err, products) {
