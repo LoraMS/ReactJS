@@ -1,7 +1,83 @@
+# The Bookstore
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## About the project
+
+The Bookstore is Single Page Application using React on front end, Node.js, Express on back end, MongoDB(Database/Authentication), Bootstrap4, Toastr, etc.
+
+## Project Requirements
+* [Requirements](https://softuni.bg/trainings/resources/officedocument/32101/project-assignment-reactjs-fundamentals-june-2018/open)
+
+The Web Application consists of the following sections:
+
+## Home section
+
+* Welcome screen with a preview of what you can expect from our site.
+
+## Book section
+
+* You can read and choose from many books.
+* You can add book in your list with books.
+* Leave a comment.
+
+## Events section
+
+* You can read and choose from many events.
+* You can take part in upcoming events.
+
+## Authentication section
+
+* Register Form
+* Login Form
+
+## User Profile section
+
+* You can view all your user details and collections of books and events.
+
+## About section
+
+* You can find more information about The Bookstore and looking for address details on the map.
+
+## ShoppingCart section
+
+* You can add books in shopping cart and buy them.
+
+## Users
+
+1. Everyone (not registered) will see
+
+* home page
+* all books
+* all events
+* about page
+* register and login form
+
+2. Regular user
+
+ * can see details about the book
+ * can add book in own book list
+ * can leave review about the book
+ * can see details about the event
+ * can take part in upcoming event
+ * can add books in shopping cart
+ * can see own profile and collections
+ 
+ 3. Admin
+ 
+ * can create, edit or delete books
+ * can create, edit or delete events
+ * can delete user
+ 
+ ## Live demo
+ * [Preview](https://book-store-40036.herokuapp.com)
+ 
+ ## Source code
+ * [GitHub](https://github.com/LoraMS/ReactJS/tree/master/OnlineBookstore)
+ 
 
 ## Table of Contents
 
