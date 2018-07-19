@@ -78,7 +78,6 @@ class App extends Component {
     this.sumTotalAmount(this.state.cart);
   }
   
-  // not finished
   handleRemoveBook(id, e){
     let cart = this.state.cart;
     let index = cart.findIndex((b => b.id === id));
@@ -146,6 +145,7 @@ class App extends Component {
       <div className="App">
         <Header 
         loggedIn={ localStorage.getItem('jwtToken') !== null } 
+        isAdmin={ localStorage.getItem('role') === 'admin'}
         total={this.state.totalAmount}
         totalItems={this.state.totalItems}
         cartItems={this.state.cart}

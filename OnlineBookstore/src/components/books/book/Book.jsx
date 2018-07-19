@@ -14,7 +14,8 @@ class Book extends Component {
       book: {},
       selectedBook: {},
       add: '',
-      isAdded: false
+      isAdded: false,
+      review: {}
     };
   }
 
@@ -47,7 +48,7 @@ class Book extends Component {
   delete(id){
     axios.delete('/api/book/'+id)
       .then((result) => {
-        toastr.success('Book delete successfully!');
+        toastr.success('Book deleted successfully!');
         this.props.history.push('/catalog');
       });
   }
@@ -110,10 +111,17 @@ class Book extends Component {
     });
   }
 
+  updateReview({author, content}) {
+    this.setState({review: {author, content}});
+  }
+
   render() {
     const rArray = this.state.book.reviews || [];
+    // rArray.push(this.state.review);
     const label = this.state.add ?  'Add to' : 'Remove from';
     const role = localStorage.getItem('role');
+
+    console.log(this.state.book.reviews)
 
     return (
       <div className="container">
@@ -158,7 +166,7 @@ class Book extends Component {
             <div className="reviews-form bg-light p-3 mb-3 border">
               <h5><u>Add Review</u></h5>
               <div className="review-add">
-                <AddComment id={this.props.match.params.id}/>
+                <AddComment id={this.props.match.params.id} />
               </div>
             </div>
             <div className="reviews-content bg-light p-3 mb-3 border">
@@ -175,3 +183,5 @@ class Book extends Component {
 }
 
 export default withRouter(Book);
+
+//update={this.updateReview.bind(this)}

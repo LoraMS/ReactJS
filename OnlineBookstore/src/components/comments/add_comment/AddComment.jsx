@@ -13,9 +13,6 @@ class AddComment extends Component{
             content: '',
             message: '',
         };
-
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount(){
@@ -34,9 +31,9 @@ class AddComment extends Component{
         const {author, content} = this.state;
         axios.put(`/api/book/${this.props.id}/comments` , {author, content})
         .then((result) => {
-            //  window.location.reload();
             toastr.success('Comment is added successfully!');
             this.props.history.go(0);
+            // this.forceUpdate();
         })
         .catch((error) => {
             if(error.response.status === 401) {
@@ -47,8 +44,9 @@ class AddComment extends Component{
     }
 
     render(){
+        const {author, content} = this.state;
         return(
-            <form id="commentForm" onSubmit={this.onSubmit}>
+            <form id="commentForm" onSubmit={this.onSubmit.bind(this)}>
                 {this.state.message !== '' &&
                 <div className="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>Error</strong> {this.state.message}
@@ -59,11 +57,12 @@ class AddComment extends Component{
                 }
                 <div className="form-group">
                     <label htmlFor="content" className="sr-only">Review</label>
-                    <textarea className="form-control" name="content" placeholder="Review" cols="80" rows="2" value={this.state.content} onChange={this.onChange}></textarea>
+                    <textarea className="form-control" name="content" placeholder="Review" cols="80" rows="2" value={this.state.content} onChange={this.onChange.bind(this)}></textarea>
                 </div>
-                <input type="submit" value="Add Review" className="btn btn-sm btn-secondary review-btn" />
+                <input type="submit"  value="Add Review" className="btn btn-sm btn-secondary review-btn" />
             </form>
         );
     }
 }
 export default withRouter(AddComment);
+// onClick={this.props.update({author, content})}

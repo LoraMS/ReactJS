@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Input extends Component {
-    render(){
-        const { name, type, value, onChange, label, placeholder } = this.props;
+const Input = (props) => {
+        const { name, type, value, onChange, label, placeholder } = props;
         return(
             <div>
                 <label className="sr-only" htmlFor={name}>{label}</label>
@@ -15,5 +14,6 @@ export default class Input extends Component {
                 onChange={onChange}/>
             </div>
         );
-    }
 }
+
+export default Input;

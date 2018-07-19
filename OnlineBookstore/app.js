@@ -17,6 +17,7 @@ const auth = require('./routes/auth');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://Admin:admin1@ds261040.mlab.com:61040/bookstore', {promiseLibrary: require('bluebird') })
+// mongoose.connect('mongodb://localhost:27017/bookstore', {promiseLibrary: require('bluebird')})
   .then(() => console.log('connection succesful'))
   .catch((err) => console.error(err));
 

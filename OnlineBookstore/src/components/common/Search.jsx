@@ -24,28 +24,3 @@ class Search extends Component {
 
 export default Search;
 
-// .then((publication) => {
-//     if (!publication) {
-//         return res.render('errors/not-found');
-//     }
-//     return res.render('publication-views/publications', {
-//         model: publications,
-//     });
-
-
-
-    // handleInputChange(e) {
-    //     this.setState({
-            // query: this.search.value
-            // query: e.target.value
-        //   }, () => {
-        //     if (this.state.query && this.state.query.length > 1) {
-        //       if (this.state.query.length % 2 === 0) {
-        //         this.setState({
-        //             items: this.props.items
-        //           })
-        //       }
-        //     } else if (!this.state.query) {
-        //     }
-    //       })
-    // }

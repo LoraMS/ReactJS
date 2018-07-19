@@ -4,7 +4,7 @@ import ShoppingCart from '../shopping_cart/ShoppingCart';
 
 export default class Header extends Component {
     render(){
-        const { loggedIn, onLogout, total, totalItems, cartItems, removeBook, checkout } = this.props;
+        const { loggedIn, isAdmin, onLogout, total, totalItems, cartItems, removeBook, checkout } = this.props;
 
         return(
             <header>
@@ -17,12 +17,12 @@ export default class Header extends Component {
                 {!loggedIn && <NavLink to="/register" activeClassName="active" className="nav nav-link">Register</NavLink>}
                 {!loggedIn && <NavLink to="/login" activeClassName="active" className="nav nav-link">Login</NavLink>}
                 {loggedIn && <NavLink to="/profile" activeClassName="active" className="nav  nav-link">Profile</NavLink>}
-                {loggedIn && <div className="dropdown">
+                {isAdmin && <div className="dropdown">
                 <button className="btn dropdown-toggle btn-header" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <Link to="/create" className="dropdown-item nav nav-link">Create Book</Link>
                     <Link to="/add" className="dropdown-item nav nav-link">Create Event</Link>
-                    <Link to="/list" className="dropdown-item nav nav-link">All User</Link>
+                    <Link to="/list" className="dropdown-item nav nav-link">All Users</Link>
                 </div>
                 </div>}
                 {loggedIn && <a href="javascript:void(0)" onClick={onLogout} className="nav nav-link">Logout</a>}

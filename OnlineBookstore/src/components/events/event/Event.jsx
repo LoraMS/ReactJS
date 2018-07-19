@@ -55,7 +55,7 @@ class Event extends Component {
     delete(id){
       axios.delete('/api/event/'+id)
         .then((result) => {
-          toastr.success('Event delete successfully!');
+          toastr.success('Event deleted successfully!');
           this.props.history.push('/events');
         });
       }
