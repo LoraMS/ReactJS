@@ -13,8 +13,30 @@ class Login extends Component {
       username: '',
       password: '',
       message: '',
+      errors:{},
+      submitting: false,
     };
   }
+  
+  validate = (username, password) => {
+    let errors = {};
+    let formIsValid = true;
+  
+    if (username.trim().length === 0) {
+      formIsValid = false;
+      errors["username"] = 'Please provide your namee';
+    }
+  
+    if (password.trim().length === 0) {
+      formIsValid = false;
+      errors["password"] = 'Please provide your passwordd.';
+    }
+  
+    this.setState({errors: errors})
+    
+    return formIsValid;
+  }
+  
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
@@ -23,8 +45,17 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-
+    
     const { username, password } = this.state;
+
+    this.setState({submitting: true});  
+
+    if (!this.validate(username, password)) {
+      this.setState({submitting: false})
+      toastr.error('Check the form for errors.');
+      return;
+    }
+    this.setState({errors: {}});
 
     axios.post('/api/auth/login', { username, password })
       .then((result) => {
@@ -34,19 +65,23 @@ class Login extends Component {
         localStorage.setItem('role', result.data.role);
         
         toastr.success('Login successful!');   
-        this.setState({ message: '' });
+        this.setState({ 
+          message: '', 
+          submitting: false 
+        });
         this.props.history.push('/')
       })
       .catch((error) => {
         if(error.response.status === 401) {
           toastr.error('Login failed!Check the form for errors!');
+          this.setState({submitting: false}); 
           this.setState({ message: error.response.data.message });
         }
       });
   }
 
   render() {
-    const { username, password, message } = this.state;
+    const { username, password, message, errors } = this.state;
     return (
       <div className="container">
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -66,6 +101,7 @@ class Login extends Component {
             placeholder="Username"
             onChange={this.onChange}
             label="Username" />
+            <small className="error mb-2">{errors["username"]}</small>
           <Input
             name="password"
             type="password"
@@ -73,6 +109,7 @@ class Login extends Component {
             placeholder="Password"
             onChange={this.onChange}
             label="Password" />
+            <small className="error mb-2">{errors["password"]}</small>
           <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
           <p>
             Not a member? <Link to="/register">Register here</Link>

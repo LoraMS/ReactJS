@@ -29,6 +29,12 @@ class AddComment extends Component{
     onSubmit(e){
         e.preventDefault();
         const {author, content} = this.state;
+
+        if (content.trim().length < 2) {
+            this.setState({ message: 'Comment must be more than 2 symbols.' });
+            return;
+        }
+
         axios.put(`/api/book/${this.props.id}/comments` , {author, content})
         .then((result) => {
             toastr.success('Comment is added successfully!');
@@ -37,7 +43,7 @@ class AddComment extends Component{
         })
         .catch((error) => {
             if(error.response.status === 401) {
-                toastr.error('Comment failed. Check the form for errors.');
+                toastr.error('Check the form for errors.');
                 this.setState({ message: error.response.data.message });
             }
         });
