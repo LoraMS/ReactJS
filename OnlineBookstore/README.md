@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The Bookstore is Single Page Application using React on front end, Node.js, Express on back end, MongoDB(Database/Authentication), Bootstrap4, Toastr, etc.
 
+![Alt Text](https://media.giphy.com/media/5rfx67VxZjpOHp8Qmn/giphy.gif)
+
 ## Project Requirements
 * [Requirements](https://softuni.bg/trainings/resources/officedocument/32101/project-assignment-reactjs-fundamentals-june-2018/open)
 
@@ -63,18 +65,31 @@ The Web Application consists of the following sections:
  * can add books in shopping cart
  * can see own profile and collections
  
- 3. Admin
+3. Admin
  
  * can create, edit or delete books
  * can create, edit or delete events
  * can delete user
  
- ## Live demo
- * [Preview](https://book-store-40036.herokuapp.com)
+## Live demo
+	* [Preview](https://book-store-40036.herokuapp.com)
  
- ## Source code
- * [GitHub](https://github.com/LoraMS/ReactJS/tree/master/OnlineBookstore)
+## Source code
+	* [GitHub](https://github.com/LoraMS/ReactJS/tree/master/OnlineBookstore)
  
+## Setup
+ 
+	Go to the project folder and install required dependencies
+```
+	npm install
+```
+	To run the project in the development mode
+```
+	npm run build
+	npm start
+```
+	Open http://localhost:3000 to view it in the browser
+
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
