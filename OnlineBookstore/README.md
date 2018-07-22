@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The Bookstore is Single Page Application using React on front end, Node.js, Express on back end, MongoDB(Database/Authentication), Bootstrap4, Toastr, etc.
 
-![Alt Text](https://media.giphy.com/media/5rfx67VxZjpOHp8Qmn/giphy.gif)
+![Alt Text](https://drive.google.com/open?id=11EA4S3uoHifFxxtF2ZoWek64O72pRsZr)
 
 ## Project Requirements
 * [Requirements](https://softuni.bg/trainings/resources/officedocument/32101/project-assignment-reactjs-fundamentals-june-2018/open)
