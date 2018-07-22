@@ -72,22 +72,22 @@ The Web Application consists of the following sections:
  * can delete user
  
 ## Live demo
-	* [Preview](https://book-store-40036.herokuapp.com)
+* [Preview](https://book-store-40036.herokuapp.com)
  
 ## Source code
-	* [GitHub](https://github.com/LoraMS/ReactJS/tree/master/OnlineBookstore)
+* [GitHub](https://github.com/LoraMS/ReactJS/tree/master/OnlineBookstore)
  
 ## Setup
  
 	Go to the project folder and install required dependencies
-```
-	npm install
-```
+
+	`npm install`
+
 	To run the project in the development mode
-```
-	npm run build
-	npm start
-```
+
+	`npm run build`
+	`npm start`
+
 	Open http://localhost:3000 to view it in the browser
 
 
