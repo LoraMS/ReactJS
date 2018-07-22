@@ -85,10 +85,13 @@ Go to the project folder and install required dependencies
 
 To run the project in the development mode
 
-`npm run build`
-`npm start`
+```
+npm run build
+npm start
+```
 
 Open http://localhost:3000 to view it in the browser
+
 
 
 Below you will find some information on how to perform common tasks.<br>
