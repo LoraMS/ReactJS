@@ -79,16 +79,16 @@ The Web Application consists of the following sections:
  
 ## Setup
  
-	Go to the project folder and install required dependencies
+Go to the project folder and install required dependencies
 
-	`npm install`
+`npm install`
 
-	To run the project in the development mode
+To run the project in the development mode
 
-	`npm run build`
-	`npm start`
+`npm run build`
+`npm start`
 
-	Open http://localhost:3000 to view it in the browser
+Open http://localhost:3000 to view it in the browser
 
 
 Below you will find some information on how to perform common tasks.<br>
