@@ -9,7 +9,7 @@ The Bookstore is Single Page Application using React on front end, Node.js, Expr
 ![Alt Text](https://github.com/LoraMS/ReactJS/blob/master/OnlineBookstore/public/video-to-gif.gif)
 
 ## Project Requirements
-* [Requirements](https://softuni.bg/trainings/resources/officedocument/32101/project-assignment-reactjs-fundamentals-june-2018/open)
+* [Requirements](https://drive.google.com/open?id=1J4J5MUMA4Mokg5QqMjHDg0Xk166R9y1K)
 
 The Web Application consists of the following sections:
 
