@@ -16,7 +16,8 @@ const auth = require('./routes/auth');
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://Admin:admin1@ds261040.mlab.com:61040/bookstore', {promiseLibrary: require('bluebird') })
+mongoose.connect(process.env.PROD_MONGODB || 'mongodb://Admin:admin1@bookstore-shard-00-00.dd7jg.mongodb.net:27017,bookstore-shard-00-01.dd7jg.mongodb.net:27017,bookstore-shard-00-02.dd7jg.mongodb.net:27017/bookstore?ssl=true&replicaSet=atlas-104jno-shard-0&authSource=admin&retryWrites=true&w=majority', {promiseLibrary: require('bluebird') })
+// mongoose.connect('mongodb://Admin:admin1@ds261040.mlab.com:61040/bookstore', {promiseLibrary: require('bluebird') })
 // mongoose.connect('mongodb://localhost:27017/bookstore', {promiseLibrary: require('bluebird')})
   .then(() => console.log('connection succesful'))
   .catch((err) => console.error(err));
